@@ -8,9 +8,9 @@
 [https://docs.google.com/spreadsheets/d/1tAolHvdSZUqzN1v54wQQhXsosJQsSVjXHvc1UjUMKPA/edit#gid=0](https://docs.google.com/spreadsheets/d/1tAolHvdSZUqzN1v54wQQhXsosJQsSVjXHvc1UjUMKPA/edit#gid=0)
 
 ## 요청 URL형식 
-- 사용자 근처 측정소 : GET air.honux.com/location?latitude=36.5&longitude=-122.321
-- 예보 이미지 : GET air.honux.com/images
-- 예보 문구, 지역별 등급 : GET air.honux.com/information
+- 사용자 근처 측정소 : GET https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/location?latitude=36.5&longitude=-122.321
+- 예보 이미지 : GET https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/images
+- 예보 문구, 지역별 등급 : GET https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/information
 
 
 ## Json 형식 
@@ -21,6 +21,11 @@
   "dustValues": [10, 20, 30, 40, 50, 60, 70, 80, 90. 100, 110, 120, 
                 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240]
 }
+```
+
+- 예보 이미지
+```
+{ "image" : "image"}
 ```
 
 - 예보 문구, 지역별 등급
