@@ -1,5 +1,9 @@
+const init = () => {
+    
+}
+
 const registerEventListener = () => {
 
 }
 
-export default {registerEventListener}
+export default {init, registerEventListener}
