@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		78817368243208E700CC0BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78817367243208E700CC0BD6 /* AppDelegate.swift */; };
 		7881736A243208E700CC0BD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78817369243208E700CC0BD6 /* SceneDelegate.swift */; };
-		7881736C243208E700CC0BD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881736B243208E700CC0BD6 /* ViewController.swift */; };
 		7881736F243208E700CC0BD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7881736D243208E700CC0BD6 /* Main.storyboard */; };
 		78817371243208E900CC0BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78817370243208E900CC0BD6 /* Assets.xcassets */; };
 		78817374243208E900CC0BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78817372243208E900CC0BD6 /* LaunchScreen.storyboard */; };
 		7881737F243208E900CC0BD6 /* DustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881737E243208E900CC0BD6 /* DustTests.swift */; };
+		78CEB51C24332B220091154B /* DustTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51B24332B220091154B /* DustTableViewController.swift */; };
+		78CEB51E24332C8D0091154B /* DustTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */; };
+		78CEB52024332D080091154B /* DustTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51F24332D080091154B /* DustTableViewDataSource.swift */; };
+		78CEB52324332D760091154B /* DustTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB52124332D760091154B /* DustTableViewCell.swift */; };
+		78CEB52424332D760091154B /* DustTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CEB52224332D760091154B /* DustTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +34,6 @@
 		78817364243208E700CC0BD6 /* Dust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78817367243208E700CC0BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78817369243208E700CC0BD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7881736B243208E700CC0BD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7881736E243208E700CC0BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		78817370243208E900CC0BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78817373243208E900CC0BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +41,11 @@
 		7881737A243208E900CC0BD6 /* DustTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DustTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7881737E243208E900CC0BD6 /* DustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTests.swift; sourceTree = "<group>"; };
 		78817380243208E900CC0BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78CEB51B24332B220091154B /* DustTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewController.swift; sourceTree = "<group>"; };
+		78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewDelegate.swift; sourceTree = "<group>"; };
+		78CEB51F24332D080091154B /* DustTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewDataSource.swift; sourceTree = "<group>"; };
+		78CEB52124332D760091154B /* DustTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewCell.swift; sourceTree = "<group>"; };
+		78CEB52224332D760091154B /* DustTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DustTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +87,17 @@
 		78817366243208E700CC0BD6 /* Dust */ = {
 			isa = PBXGroup;
 			children = (
+				78CEB51824332AE40091154B /* Models */,
+				78CEB51924332AEC0091154B /* Views */,
+				78CEB51A24332AF40091154B /* Controllers */,
 				78817367243208E700CC0BD6 /* AppDelegate.swift */,
 				78817369243208E700CC0BD6 /* SceneDelegate.swift */,
-				7881736B243208E700CC0BD6 /* ViewController.swift */,
 				7881736D243208E700CC0BD6 /* Main.storyboard */,
 				78817370243208E900CC0BD6 /* Assets.xcassets */,
 				78817372243208E900CC0BD6 /* LaunchScreen.storyboard */,
 				78817375243208E900CC0BD6 /* Info.plist */,
+				78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */,
+				78CEB51F24332D080091154B /* DustTableViewDataSource.swift */,
 			);
 			path = Dust;
 			sourceTree = "<group>";
@@ -97,6 +109,30 @@
 				78817380243208E900CC0BD6 /* Info.plist */,
 			);
 			path = DustTests;
+			sourceTree = "<group>";
+		};
+		78CEB51824332AE40091154B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		78CEB51924332AEC0091154B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				78CEB52124332D760091154B /* DustTableViewCell.swift */,
+				78CEB52224332D760091154B /* DustTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		78CEB51A24332AF40091154B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				78CEB51B24332B220091154B /* DustTableViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78817374243208E900CC0BD6 /* LaunchScreen.storyboard in Resources */,
+				78CEB52424332D760091154B /* DustTableViewCell.xib in Resources */,
 				78817371243208E900CC0BD6 /* Assets.xcassets in Resources */,
 				7881736F243208E700CC0BD6 /* Main.storyboard in Resources */,
 			);
@@ -200,9 +237,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7881736C243208E700CC0BD6 /* ViewController.swift in Sources */,
 				78817368243208E700CC0BD6 /* AppDelegate.swift in Sources */,
+				78CEB52024332D080091154B /* DustTableViewDataSource.swift in Sources */,
+				78CEB51C24332B220091154B /* DustTableViewController.swift in Sources */,
+				78CEB51E24332C8D0091154B /* DustTableViewDelegate.swift in Sources */,
 				7881736A243208E700CC0BD6 /* SceneDelegate.swift in Sources */,
+				78CEB52324332D760091154B /* DustTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
