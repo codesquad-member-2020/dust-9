@@ -90,14 +90,14 @@
 				78CEB51824332AE40091154B /* Models */,
 				78CEB51924332AEC0091154B /* Views */,
 				78CEB51A24332AF40091154B /* Controllers */,
+				78CEB51F24332D080091154B /* DustTableViewDataSource.swift */,
+				78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */,
 				78817367243208E700CC0BD6 /* AppDelegate.swift */,
 				78817369243208E700CC0BD6 /* SceneDelegate.swift */,
 				7881736D243208E700CC0BD6 /* Main.storyboard */,
 				78817370243208E900CC0BD6 /* Assets.xcassets */,
 				78817372243208E900CC0BD6 /* LaunchScreen.storyboard */,
 				78817375243208E900CC0BD6 /* Info.plist */,
-				78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */,
-				78CEB51F24332D080091154B /* DustTableViewDataSource.swift */,
 			);
 			path = Dust;
 			sourceTree = "<group>";

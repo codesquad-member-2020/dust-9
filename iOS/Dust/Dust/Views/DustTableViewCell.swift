@@ -9,6 +9,9 @@
 import UIKit
 
 class DustTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var dustBar: UIView!
+    @IBOutlet weak var dustValue: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

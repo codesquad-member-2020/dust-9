@@ -67,7 +67,7 @@
         <!--미세먼지-->
         <scene sceneID="mha-4N-S49">
             <objects>
-                <viewController id="Vre-7T-qEx" sceneMemberID="viewController">
+                <viewController id="Vre-7T-qEx" customClass="DustTableViewController" customModule="Dust" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LEb-Dm-jEg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,6 +126,9 @@
                         <viewLayoutGuide key="safeArea" id="iua-0J-9fc"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="미세먼지" image="smoke.fill" id="Eaj-8C-db1"/>
+                    <connections>
+                        <outlet property="tableView" destination="bqH-d2-a2d" id="3Go-cl-nn4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5jU-1d-tkr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
