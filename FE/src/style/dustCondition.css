@@ -1,7 +1,6 @@
 .dustCondition{
   width: 100%;
   height: 666px;
-  background-color: steelblue;
 }
 .dustCondition > .dustInfo{
   height: 340px;
@@ -45,9 +44,6 @@
 }
 .dustCondition > .dustGraph > ul > li > .graph{
   position: absolute;
-  width: 100px;
-  background-color: yellow;
-  color: yellow;
 }
 
 /* 
