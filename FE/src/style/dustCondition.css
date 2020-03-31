@@ -3,6 +3,52 @@
   height: 666px;
   background-color: steelblue;
 }
+.dustCondition > .dustInfo{
+  height: 340px;
+  text-align: center;
+  background:linear-gradient(to top,white, #6096D8);
+}
+.dustCondition > .dustInfo >.gradeEmoji{
+  font-size: 130px;
+}
+.dustCondition > .dustInfo >.grade{
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px;
+}
+.dustCondition > .dustInfo >.dustValue{
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.dustCondition > .dustInfo >.timeValue{
+  font-size: 25px;
+}
+.dustCondition > .dustInfo >.measureStation {
+  font-size: 15px;
+  margin: 10px;
+}
+.dustCondition > .dustInfo >.measureStation>.stationName {
+  font-weight: bold;
+}
+.dustCondition > .dustGraph {
+  height: 326px;
+  overflow: scroll;
+}
+.dustCondition > .dustGraph > ul >li  {
+  border: solid 0.1px #F2F2F2;
+  text-align: right;
+  padding-right: 10px;
+}
+.dustCondition > .dustGraph > ul > li > .graphValue{
+  position: relative;
+}
+.dustCondition > .dustGraph > ul > li > .graph{
+  position: absolute;
+  width: 100px;
+  background-color: yellow;
+  color: yellow;
+}
 
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
