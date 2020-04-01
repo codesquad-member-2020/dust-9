@@ -1,0 +1,393 @@
+/* 여백 초기화 */
+body, div, ul, li, dl, dd, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p, select, table, th, td, tr, textarea, button, form, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+/* a 링크 초기화 */
+a {
+  color: #222;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2698cb;
+}
+
+/* 폰트 초기화 */
+body, input, textarea, select, button, table {
+  font-family: 'Noto Sans KR', AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum, '돋움', sans-serif;
+  color: #222;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* 폰트 스타일 초기화 */
+em, address {
+  font-style: normal;
+}
+
+/* 블릿기호 초기화 */
+ul, li, ol {
+  list-style: none;
+}
+
+/* 제목 태그 초기화 */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+/* 테두리 초기화 */
+img, fieldset {
+  border: 0 none;
+}
+
+/* 버튼 초기화 */
+button {
+  border: 0;
+}
+
+/* 반응형 */
+video, img {
+  width: 100%;
+}
+
+/* clearfix */
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before, .clearfix:after {
+  display: block;
+  content: '';
+  line-height: 0;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.ir_pm {
+  display: block;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 의미있는 이미지의 대체 텍스트를 제공하는 경우(Phark Method) */
+.ir_wa {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* 의미있는 이미지의 대체 텍스트로 이미지가 없어도 대체 텍스트를 보여주고자 할 때(WA IR) */
+.ir_so {
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 대체 텍스트가 아닌 접근성을 위한 숨김 텍스트를 제공할 때 */
+
+/* input style */
+input {
+  background-image: none;
+}
+
+input[type=button],
+input[type=reset],
+input[type=text],
+input[type=password],
+input[type=submit],
+input[type=search],
+input[type=tel],
+input[type=email] {
+  -webkit-appearance: none;
+  border-radius: 0
+}
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none
+}
+
+input:checked[type=checkbox] {
+  background-color: #666;
+  -webkit-appearance: checkbox
+}
+
+/* 셀렉트 메뉴 메인 스타일 */
+.ui_select2 {
+  width: 100%;
+  box-sizing: border-box;
+  background: #2c2f34;
+  color: #fff;
+  display: inline-block;
+  height: 36px;
+  border: 0 none;
+  padding: 0 10px;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  vertical-align: middle;
+  text-align: left;
+  white-space: nowrap;
+  background-size: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* 메인 텍스트 박스 스타일1 */
+.ui_input3 {
+  background: #2c2f34;
+  color: #fff;
+  border: 0;
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+}
+
+.wrap {
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.content {
+  width: 100%;
+}
+
+.dustCondition {
+  width: 100%;
+  height: 666px;
+}
+
+.dustCondition > .dustInfo {
+  height: 340px;
+  text-align: center;
+  background: linear-gradient(to top, white, #6096D8);
+}
+
+.dustCondition > .dustInfo > .gradeEmoji {
+  font-size: 130px;
+}
+
+.dustCondition > .dustInfo > .grade {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.dustCondition > .dustInfo > .dustValue {
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.dustCondition > .dustInfo > .timeValue {
+  font-size: 25px;
+}
+
+.dustCondition > .dustInfo > .measureStation {
+  font-size: 15px;
+  margin: 10px;
+}
+
+.dustCondition > .dustInfo > .measureStation > .stationName {
+  font-weight: bold;
+}
+
+.dustCondition > .dustGraph {
+  height: 326px;
+  overflow: scroll;
+}
+
+.dustCondition > .dustGraph > ul > li {
+  border: solid 0.1px #F2F2F2;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.dustCondition > .dustGraph > ul > li > .graphValue {
+  position: relative;
+}
+
+.dustCondition > .dustGraph > ul > li > .graph {
+  position: absolute;
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+/* @media (min-width: 320px) and (max-width: 480px) {
+    .dustCondition{
+        width: 100%;
+        height: 666px;
+        background-color: steelblue;
+    }
+} */
+.dustForecast {
+  width: 414px;
+  height: 666px;
+  margin: 0 auto;
+}
+
+.dustForecast > .imageArea {
+  width: 414px;
+  height: 370px;
+}
+
+.dustForecast > .imageArea > img {
+  width: 100%;
+  height: 100%;
+}
+
+.dustForecast > .informOverall > p {
+  width: 95%;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+.dustForecast > .informGrade {
+  margin-top: 15px;
+}
+
+.dustForecast > .informGrade > p {
+  width: 95%;
+  font-size: 16px;
+  margin: 0 auto;
+}
+
+.dustForecast > .controll {
+  width: 100%;
+  height: 100px;
+}
+
+.dustForecast > .controll > .playpause {
+  width: 50px;
+  height: 70px;
+  float: left;
+}
+
+.dustForecast > .controll > .playpause > label {
+  display: block;
+  box-sizing: border-box;
+  width: 0;
+  height: 37px;
+  margin-left: 20px;
+  border-color: transparent transparent transparent #202020;
+  transition: 100ms all ease;
+  cursor: pointer;
+  border-style: double;
+  border-width: 0 0 0 30px;
+}
+
+.dustForecast > .controll > .playpause > label:active {
+  border-color: transparent transparent transparent darkgray;
+}
+
+.dustForecast > .controll > .playpause > :checked + label {
+  border-style: solid;
+  border-width: 18px 0 18px 30px;
+}
+
+.dustForecast > .controll > .playpause > input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.dustForecast > .controll > .scrollBar {
+  width: 334px;
+  height: 70px;
+  padding-left: 30px;
+  display: inline-block;
+  align-items: center;
+}
+
+.dustForecast > .controll > .scrollBar > .bar {
+  width: 300px;
+  height: 3px;
+  background: gray;
+  margin-left: 13px;
+  margin-top: 36px;
+}
+
+.dustForecast > .controll > .scrollBar > button {
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-top: -15px;
+  border-radius: 25px;
+  margin-left: 0px;
+  background-color: darkgray;
+}
+
+
+.dustForecast > .controll > .scrollBar > button:active {
+  background-color: gray;
+}
+
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+/* @media (min-width: 320px) and (max-width: 480px) {
+    .dustForecast{
+        width: 100%;
+        height: 666px;
+        background-color: steelblue;
+    }
+} */
+.navigation {
+  width: 414px;
+  height: 70px;
+  margin: 0 auto;
+  /* background-color: #2E2E2E; */
+}
+
+.navigation > .buttonArea {
+  width: 414px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navigation > .buttonArea > button {
+  width: 207px;
+  height: 80px;
+  float: left;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #2E2E2E;
+  transition: background-color 0.2s;
+}
+
+.navigation > .buttonArea > button:focus {
+  color: #DBA901;
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+/* @media (min-width: 320px) and (max-width: 480px) {
+    .navigation  {
+        width: 100%;
+        height: 70px;
+        background-color: black;
+    }
+} */
