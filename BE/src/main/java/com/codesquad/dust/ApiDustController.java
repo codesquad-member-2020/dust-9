@@ -64,7 +64,7 @@ public class ApiDustController {
         for (int count = 0; count < 24; count++) {
             JSONObject eachData = (JSONObject) secondDate.get(count);
             String pm10Value = (String) eachData.get("pm10Value");
-            String pm10Grade = (String) eachData.get("pm10Grade");
+            String pm10Grade = (String) eachData.get("pm10Grade1h");
             String dataTime = (String) eachData.get("dataTime");
             String[] splitDataTime = dataTime.split(" ");
             String[] splitDataTimeTwo = splitDataTime[1].split(":");
