@@ -2,30 +2,29 @@
   width: 414px;
   height: 70px;
   margin: 0 auto;
+  /* background-color: #2E2E2E; */
 }
 
 .navigation > .buttonArea{
   width: 414px;
-  padding-top: 10px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
 }
 
 .navigation > .buttonArea > button{
   width: 207px;
-  height: 60px;
+  height: 80px;
   float: left;
   text-align: center;
-  font-size: 30px;
-  background-color: lightgray;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border: 1px solid white;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #2E2E2E;
   transition: background-color 0.2s;
 }
 
-.navigation > .buttonArea > button:active{
-  background-color: grey;
-  transition: background-color 0.2s;
+.navigation > .buttonArea > button:focus{
+  color:#DBA901;
 }
 
 /* 
