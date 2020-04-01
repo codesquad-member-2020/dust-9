@@ -42,6 +42,13 @@ const init = () => {
         informOverall.innerHTML = renderInformation(data.informOverall);
         informGrade.innerHTML = renderInformation(data.informGrade);
     });
+
+    fetchRequest("https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/images", "GET")
+    .then(response => response.json())
+    .then(data => {
+        const imageArea = document.querySelector(".imageArea");
+        imageArea.innerHTML = renderImage(data.images);
+    });
 }
 
 const registerEventListener = () => {
@@ -52,6 +59,14 @@ const renderInformation = (information) => {
     <p>
         ${information}
     </p>
+    `;
+}
+
+const renderImage = (images) => {
+    return `
+    ${Object.keys(images).map(key => (
+        `<img class="image" src="${images[key]}" style="display: ${key > 0 ? `none` : `block`};">\n`
+    )).join('')}
     `;
 }
 
