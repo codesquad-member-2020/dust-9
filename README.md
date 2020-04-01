@@ -25,7 +25,7 @@
 
 - 예보 이미지
 ```
-{ "image" : "image"}
+{"images": ["http://dev-angelo.dlinkddns.com/0401_00.png", "http://dev-angelo.dlinkddns.com/0401_01.png", "http://dev-angelo.dlinkddns.com/0401_02.png", "http://dev-angelo.dlinkddns.com/0401_03.png", "http://dev-angelo.dlinkddns.com/0401_04.png", "http://dev-angelo.dlinkddns.com/0401_05.png", "http://dev-angelo.dlinkddns.com/0401_06.png", "http://dev-angelo.dlinkddns.com/0401_07.png", "http://dev-angelo.dlinkddns.com/0401_08.png", "http://dev-angelo.dlinkddns.com/0401_09.png", "http://dev-angelo.dlinkddns.com/0401_10.png", "http://dev-angelo.dlinkddns.com/0401_11.png", "http://dev-angelo.dlinkddns.com/0401_12.png", "http://dev-angelo.dlinkddns.com/0401_13.png", "http://dev-angelo.dlinkddns.com/0401_14.png", "http://dev-angelo.dlinkddns.com/0401_15.png", "http://dev-angelo.dlinkddns.com/0401_16.png", "http://dev-angelo.dlinkddns.com/0401_17.png", "http://dev-angelo.dlinkddns.com/0401_18.png", "http://dev-angelo.dlinkddns.com/0401_19.png", "http://dev-angelo.dlinkddns.com/0401_20.png", "http://dev-angelo.dlinkddns.com/0401_21.png", "http://dev-angelo.dlinkddns.com/0401_22.png", "http://dev-angelo.dlinkddns.com/0401_23.png"]}
 ```
 
 - 예보 문구, 지역별 등급
