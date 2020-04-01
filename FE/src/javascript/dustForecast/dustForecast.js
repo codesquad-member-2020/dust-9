@@ -1,3 +1,5 @@
+import {fetchRequest} from "../util/fetchrequest.js"
+
 const render = () => {
     const content = document.querySelector(".content");
     const dustForecast = `<div class="dustForecast">
@@ -31,11 +33,26 @@ const render = () => {
 }
 
 const init = () => {
-    
+    fetchRequest("https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/information", "GET")
+    .then(response => response.json())
+    .then(data => {
+        const informOverall = document.querySelector(".informOverall");
+        const informGrade = document.querySelector(".informGrade");
+
+        informOverall.innerHTML = renderInformation(data.informOverall);
+        informGrade.innerHTML = renderInformation(data.informGrade);
+    });
 }
 
 const registerEventListener = () => {
+}
 
+const renderInformation = (information) => {
+    return `
+    <p>
+        ${information}
+    </p>
+    `;
 }
 
 export default {render, init, registerEventListener}
