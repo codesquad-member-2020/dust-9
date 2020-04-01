@@ -5,15 +5,18 @@
 .dustCondition > .dustInfo{
   height: 340px;
   text-align: center;
-  background:linear-gradient(to top,white, #6096D8);
+  padding-top: 30px;
+}
+.dustCondition > .dustInfo > .title{
+  font-size: 25px;
+  font-weight: bold;
 }
 .dustCondition > .dustInfo >.gradeEmoji{
-  font-size: 130px;
+  font-size: 120px;
 }
 .dustCondition > .dustInfo >.grade{
   font-size: 25px;
   font-weight: bold;
-  margin: 10px;
 }
 .dustCondition > .dustInfo >.dustValue{
   font-size: 25px;
