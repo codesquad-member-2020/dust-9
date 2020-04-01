@@ -23,4 +23,36 @@ const init = () => {};
 
 const registerEventListener = () => {};
 
+function setGradeDisplay(gradeValue) {
+  const gradeDisplay = {
+    emoji: null,
+    grade: null,
+    background: null
+  };
+
+  switch (gradeDisplay, gradeValue) {
+    case 1:
+      gradeDisplay.emoji='😀';
+      gradeDisplay.grade='좋음';
+      gradeDisplay.background='#6096D8';
+      break;
+    case 2:
+      gradeDisplay.emoji='🙂';
+      gradeDisplay.grade='보통';
+      gradeDisplay.background='#088A68';
+      break;
+    case 3:
+      gradeDisplay.emoji='😷';
+      gradeDisplay.grade='나쁨';
+      gradeDisplay.background='#FAAC58';
+      break;
+    case 4:
+      gradeDisplay.emoji='😱';
+      gradeDisplay.grade='매우 나쁨';
+      gradeDisplay.background='#FA5858';
+      break;
+  }
+  return gradeDisplay;
+}
+
 export default { render, init, registerEventListener };
