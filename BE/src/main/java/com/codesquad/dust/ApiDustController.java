@@ -1,10 +1,20 @@
 package com.codesquad.dust;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 @RestController
 public class ApiDustController {
@@ -17,15 +27,59 @@ public class ApiDustController {
     }
 
     @GetMapping("/location")
-    public String stations(@RequestParam(value = "latitude") String latitude,
-                           @RequestParam(value = "longitude") String longitude) {
+    public JSONObject stations(@RequestParam(value = "latitude") String latitude,
+                               @RequestParam(value = "longitude") String longitude) throws ParseException {
         logger.info("latitude : {}", latitude);
         logger.info("longitude : {}", longitude);
-        String result = "{\n" +
-                "  \"stationName\": \"강남구\",\n" +
-                "  \"dustValues\": [10, 20, 30, 40, 50, 60, 70, 80, 90. 100, 110, 120, \n" +
-                "                130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240]\n" +
-                "}";
-        return result;
+
+        StringBuffer result = new StringBuffer();
+        try {
+            String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?" +
+                    "stationName=노원구" +
+                    "&dataTerm=daily" +
+                    "&pageNo=1" +
+                    "&numOfRows=24" +
+                    "&ServiceKey=sk%2FDXfdYMcYzpqoqa%2FB3wfVChJB7GPbzZgxasEmcfvZogvbX0H77alhv2Ct%2FaXvRw63OsFrEP8MusiURY7xjAQ%3D%3D" +
+                    "&ver=1.3" +
+                    "&_returnType=json";
+
+            URL url = new URL(urlString);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+            while ((returnLine = br.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            httpURLConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONObject rawDateFromOpenApi = (JSONObject) new JSONParser().parse(String.valueOf(result));
+        JSONArray secondDate = (JSONArray) rawDateFromOpenApi.get("list");
+        JSONArray dustValues = new JSONArray();
+        for (int count = 0; count < 24; count++) {
+            JSONObject eachData = (JSONObject) secondDate.get(count);
+            String pm10Value = (String) eachData.get("pm10Value");
+            String pm10Grade = (String) eachData.get("pm10Grade");
+            String dataTime = (String) eachData.get("dataTime");
+            String[] splitDataTime = dataTime.split(" ");
+            String[] splitDataTimeTwo = splitDataTime[1].split(":");
+            String hour = splitDataTimeTwo[0];
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("pm10Value", pm10Value);
+            hashMap.put("pm10Grade", pm10Grade);
+            hashMap.put("datetime", hour);
+
+            JSONObject jsonObject = new JSONObject(hashMap);
+            dustValues.add(jsonObject);
+        }
+        JSONObject parsedData = new JSONObject();
+        parsedData.put("stationName", "노원구");
+        parsedData.put("dustValues", dustValues);
+        return parsedData;
     }
 }
