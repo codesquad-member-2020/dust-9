@@ -5,7 +5,6 @@ const render = () => {
     const dustForecast = `<div class="dustForecast">
     <div class="dustForecast">
     <div class="imageArea">
-      <img class="image" src="https://search.pstatic.net/common?quality=75&amp;direct=true&amp;src=https%3A%2F%2Fcsearch-phinf.pstatic.net%2F20200331_159%2F15856421070981Gd7U_PNG%2Fimage.png" style="display: block;">
     </div>
     <div class="informOverall">
     </div>
