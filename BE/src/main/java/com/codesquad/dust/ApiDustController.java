@@ -82,4 +82,34 @@ public class ApiDustController {
         parsedData.put("dustValues", dustValues);
         return parsedData;
     }
+
+    @GetMapping("/geoInformation")
+    public JSONObject getGeo(@RequestParam(value = "latitude") String latitude,
+                             @RequestParam(value = "longitude") String longitude) throws ParseException {
+        StringBuffer result = new StringBuffer();
+
+        try {
+            String urlString = "http://api.vworld.kr/req/address?" +
+                    "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
+                    "&point=" + latitude + "," + longitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
+                    "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
+
+            URL url = new URL(urlString);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+            while ((returnLine = br.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            httpURLConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONObject geoInfo = (JSONObject) new JSONParser().parse(String.valueOf(result));
+        return geoInfo;
+    }
 }
