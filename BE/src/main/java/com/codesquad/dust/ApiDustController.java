@@ -9,12 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class ApiDustController {
@@ -22,8 +25,8 @@ public class ApiDustController {
     private Logger logger = LoggerFactory.getLogger(ApiDustController.class);
 
     @GetMapping("")
-    public String index() {
-        return "index";
+    public ModelAndView index() {
+        return new ModelAndView("index.html");
     }
 
     @GetMapping("/location")
@@ -111,5 +114,26 @@ public class ApiDustController {
         }
         JSONObject geoInfo = (JSONObject) new JSONParser().parse(String.valueOf(result));
         return geoInfo;
+    }
+
+    @GetMapping("images")
+    public JSONObject images() throws ParseException {
+        List<String> imageUrls = Arrays.asList("http://dev-angelo.dlinkddns.com/0401_00.png", "http://dev-angelo.dlinkddns.com/0401_01.png", "http://dev-angelo.dlinkddns.com/0401_02.png", "http://dev-angelo.dlinkddns.com/0401_03.png", "http://dev-angelo.dlinkddns.com/0401_04.png", "http://dev-angelo.dlinkddns.com/0401_05.png", "http://dev-angelo.dlinkddns.com/0401_06.png", "http://dev-angelo.dlinkddns.com/0401_07.png", "http://dev-angelo.dlinkddns.com/0401_08.png", "http://dev-angelo.dlinkddns.com/0401_09.png", "http://dev-angelo.dlinkddns.com/0401_10.png", "http://dev-angelo.dlinkddns.com/0401_11.png", "http://dev-angelo.dlinkddns.com/0401_12.png", "http://dev-angelo.dlinkddns.com/0401_13.png", "http://dev-angelo.dlinkddns.com/0401_14.png", "http://dev-angelo.dlinkddns.com/0401_15.png", "http://dev-angelo.dlinkddns.com/0401_16.png", "http://dev-angelo.dlinkddns.com/0401_17.png", "http://dev-angelo.dlinkddns.com/0401_18.png", "http://dev-angelo.dlinkddns.com/0401_19.png", "http://dev-angelo.dlinkddns.com/0401_20.png", "http://dev-angelo.dlinkddns.com/0401_21.png", "http://dev-angelo.dlinkddns.com/0401_22.png", "http://dev-angelo.dlinkddns.com/0401_23.png");
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.addAll(imageUrls);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("images", jsonArray);
+        return jsonObject;
+    }
+
+    @GetMapping("information")
+    public JSONObject information() {
+        String informOverall = "수도권·강원영서·충청권·호남권·부산·경남·제주권은 ‘나쁨’, 그 밖의 권역은 ‘보통’으로 예상됨. 다만, 그 밖의 권역에서도 ‘나쁨’ 수준의 농도가 일시적으로 나타날 수 있음";
+        String informGrade = "서울 : 나쁨,제주 : 나쁨,전남 : 나쁨,전북 : 나쁨,광주 : 나쁨,경남 : 나쁨,경북 : 보통,울산 : 보통,대구 : 보통,부산 : 나쁨,충남 : 나쁨,충북 : 나쁨,세종 : 나쁨,대전 : 나쁨,영동 : 보통,영서 : 나쁨,경기남부 : 나쁨,경기북부 : 나쁨,인천 : 나쁨";
+
+        JSONObject informaions = new JSONObject();
+        informaions.put("informOverall", informOverall);
+        informaions.put("informGrade", informGrade);
+        return informaions;
     }
 }
