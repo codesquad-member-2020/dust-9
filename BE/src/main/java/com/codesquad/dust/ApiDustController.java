@@ -146,19 +146,66 @@ public class ApiDustController {
 
     @GetMapping("images")
     public JSONObject images() throws ParseException {
-        List<String> imageUrls = Arrays.asList("http://dev-angelo.dlinkddns.com/0401_00.png", "http://dev-angelo.dlinkddns.com/0401_01.png", "http://dev-angelo.dlinkddns.com/0401_02.png", "http://dev-angelo.dlinkddns.com/0401_03.png", "http://dev-angelo.dlinkddns.com/0401_04.png", "http://dev-angelo.dlinkddns.com/0401_05.png", "http://dev-angelo.dlinkddns.com/0401_06.png", "http://dev-angelo.dlinkddns.com/0401_07.png", "http://dev-angelo.dlinkddns.com/0401_08.png", "http://dev-angelo.dlinkddns.com/0401_09.png", "http://dev-angelo.dlinkddns.com/0401_10.png", "http://dev-angelo.dlinkddns.com/0401_11.png", "http://dev-angelo.dlinkddns.com/0401_12.png", "http://dev-angelo.dlinkddns.com/0401_13.png", "http://dev-angelo.dlinkddns.com/0401_14.png", "http://dev-angelo.dlinkddns.com/0401_15.png", "http://dev-angelo.dlinkddns.com/0401_16.png", "http://dev-angelo.dlinkddns.com/0401_17.png", "http://dev-angelo.dlinkddns.com/0401_18.png", "http://dev-angelo.dlinkddns.com/0401_19.png", "http://dev-angelo.dlinkddns.com/0401_20.png", "http://dev-angelo.dlinkddns.com/0401_21.png", "http://dev-angelo.dlinkddns.com/0401_22.png", "http://dev-angelo.dlinkddns.com/0401_23.png");
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.addAll(imageUrls);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("images", jsonArray);
-        return jsonObject;
+        String informData = "2020-04-02";
+        String informCode = "PM10";
+        String dataTime = "2020-04-02 11시 발표";
+        String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMinuDustFrcstDspth?" +
+                "searchDate=" + informData +
+                "&ServiceKey=" + SERVEICE_KEY +
+                "&ver=1.1" +
+                "&_returnType=json";
+        String result = requestOpenApi(urlString);
+        JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(result);
+        JSONArray list = (JSONArray) rawDataFromAPI.get("list");
+        JSONObject whatIFind = new JSONObject();
+        for (int count = 0; count < list.size(); count++) {
+            JSONObject each = (JSONObject) list.get(count);
+            if (isWhatIWant(each, informData, informCode, dataTime)) {
+                whatIFind = each;
+                break;
+            }
+        }
+        JSONArray images = new JSONArray();
+        for (int count = 1; count < 4; count++) {
+            images.add(whatIFind.get("imageUrl" + count));
+        }
+        JSONObject imageUrls = new JSONObject();
+        imageUrls.put("images", images);
+        return imageUrls;
     }
 
-    @GetMapping("information")
-    public JSONObject information() {
-        String informOverall = "수도권·강원영서·충청권·호남권·부산·경남·제주권은 ‘나쁨’, 그 밖의 권역은 ‘보통’으로 예상됨. 다만, 그 밖의 권역에서도 ‘나쁨’ 수준의 농도가 일시적으로 나타날 수 있음";
-        String informGrade = "서울 : 나쁨,제주 : 나쁨,전남 : 나쁨,전북 : 나쁨,광주 : 나쁨,경남 : 나쁨,경북 : 보통,울산 : 보통,대구 : 보통,부산 : 나쁨,충남 : 나쁨,충북 : 나쁨,세종 : 나쁨,대전 : 나쁨,영동 : 보통,영서 : 나쁨,경기남부 : 나쁨,경기북부 : 나쁨,인천 : 나쁨";
+    private boolean isWhatIWant(JSONObject each, String informData, String informCode, String dataTime) {
+        logger.info("each : {}", each);
+        String eachSearchDate = (String) each.get("informData");
+        String eachInformCode = (String) each.get("informCode");
+        String eachDataTime = (String) each.get("dataTime");
+        return eachSearchDate.equals(informData) && eachInformCode.equals(informCode) && eachDataTime.equals(dataTime);
+    }
 
+
+    @GetMapping("information")
+    public JSONObject information() throws ParseException {
+        String informData = "2020-04-02";
+        String informCode = "PM10";
+        String dataTime = "2020-04-02 11시 발표";
+        String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMinuDustFrcstDspth?" +
+                "searchDate=" + informData +
+                "&ServiceKey=" + SERVEICE_KEY +
+                "&ver=1.1" +
+                "&_returnType=json";
+        String result = requestOpenApi(urlString);
+        JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(result);
+        JSONArray list = (JSONArray) rawDataFromAPI.get("list");
+        JSONObject whatIFind = new JSONObject();
+        for (int count = 0; count < list.size(); count++) {
+            JSONObject each = (JSONObject) list.get(count);
+            if (isWhatIWant(each, informData, informCode, dataTime)) {
+                whatIFind = each;
+                break;
+            }
+        }
+        String informOverall = (String) whatIFind.get("informOverall");
+        String informGrade = (String) whatIFind.get("informGrade");
         JSONObject informaions = new JSONObject();
         informaions.put("informOverall", informOverall);
         informaions.put("informGrade", informGrade);
