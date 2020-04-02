@@ -1,3 +1,5 @@
+import {navigationData} from "../data/navigationData.js"
+
 const init = (touchCallbackHandler) => {
     registerEventListener(touchCallbackHandler);
 }
@@ -7,11 +9,13 @@ const registerEventListener = (touchCallbackHandler) => {
 
     buttons.forEach((button, index) => {
         button.addEventListener('touchend', evt => {
-            touchCallbackHandler(index);
+            if (navigationData.getCurrentTabIndex() !== index) {
+                navigationData.changeCurrentTabIndex(index);
+                touchCallbackHandler(index);    
+            }
         })
     });
 }
-
 
 
 export default {init, registerEventListener}
