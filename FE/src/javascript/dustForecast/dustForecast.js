@@ -53,10 +53,18 @@ const init = () => {
     });
 }
 
+const stop = () => {
+    stopIndicator();
+
+    _startX = 0;
+    _pivotX = 0;
+}
+
 const stopIndicator = () => {
+    clearTimeout(_animationTimer);
+    _animationTimer = null;
     const indicator = document.querySelector('.indicator')
     _pivotX = parseInt(indicator.style.marginLeft);
-    clearTimeout(_animationTimer);
 }
 
 const moveIndicator = () => {
@@ -107,6 +115,10 @@ const registerEventListener = () => {
 
     playpause.addEventListener('touchend', evt => {
         playPauseTouchEndHandler(evt.target.previousElementSibling)
+    })
+
+    playpause.addEventListener('touchcancel', evt => {
+        console.log("AWef");
     })
 }
 
@@ -183,4 +195,4 @@ const renderImage = (images) => {
     `;
 }
 
-export default {render, init, registerEventListener}
+export default {render, init, registerEventListener, stop}

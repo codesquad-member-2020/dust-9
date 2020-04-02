@@ -3,9 +3,20 @@ import dustCondition from "./dustCondition/dustCondition.js"
 import dustForecast from "./dustForecast/dustForecast.js"
 
 window.addEventListener('DOMContentLoaded', () => {
-    //렌더링
-    //dustCondition.render()
+    navigation.init(navigationTouchEndHandler)
 
-    //초기화
-    //dustCondition.init()
+    dustCondition.render();
+    dustCondition.init();
 });
+
+const navigationTouchEndHandler = (index) => {
+    if (index) {
+        dustForecast.render();
+        dustForecast.init();
+    }
+    else {
+        dustForecast.stop();
+        dustCondition.render();
+        dustCondition.init();
+    }
+}
