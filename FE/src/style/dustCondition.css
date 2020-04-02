@@ -1,6 +1,7 @@
 .dustCondition{
-  width: 100%;
+  width: 414px;
   height: 666px;
+  margin: 0 auto;
 }
 .dustCondition > .dustInfo{
   height: 340px;
@@ -34,7 +35,7 @@
   font-weight: bold;
 }
 .dustCondition > .dustGraph {
-  height: 326px;
+  height: 296px;
   overflow: scroll;
 }
 .dustCondition > .dustGraph > ul >li  {
