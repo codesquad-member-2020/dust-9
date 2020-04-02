@@ -14,17 +14,17 @@
   height: 100%;
 }
 
-.dustForecast > .informOverall > p{
+.dustForecast > .information > .informOverall > p{
   width: 95%;
   font-size: 18px;
   margin: 0 auto;
 }
 
-.dustForecast > .informGrade{
+.dustForecast > .information >.informGrade{
   margin-top: 15px;
 }
 
-.dustForecast > .informGrade > p{
+.dustForecast > .information >.informGrade > p{
   width: 95%;
   font-size: 16px;
   margin: 0 auto;
