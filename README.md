@@ -8,18 +8,48 @@
 [https://docs.google.com/spreadsheets/d/1tAolHvdSZUqzN1v54wQQhXsosJQsSVjXHvc1UjUMKPA/edit#gid=0](https://docs.google.com/spreadsheets/d/1tAolHvdSZUqzN1v54wQQhXsosJQsSVjXHvc1UjUMKPA/edit#gid=0)
 
 ## 요청 URL형식 
-- 사용자 근처 측정소 : GET https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/location?latitude=36.5&longitude=-122.321
-- 예보 이미지 : GET https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/images
-- 예보 문구, 지역별 등급 : GET https://93814063-fe60-4baa-bafe-c4a78779934d.mock.pstmn.io/information
+- 사용자 근처 측정소 데이터 : GET http://dust9.herokuapp.com/location?latitude=123.123&longitude=-123.123
+- 예보 이미지 : GET http://dust9.herokuapp.com/images
+- 시도별 예보 문구 및 등급 : GET http://dust9.herokuapp.com/information
 
 
 ## Json 형식 
 - 사용자 근처 측정소와 지난 24시간 미세먼지 농도 응답 결과 
 ```
 {
-  "stationName": "강남구",
-  "dustValues": [10, 20, 30, 40, 50, 60, 70, 80, 90. 100, 110, 120, 
-                130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240]
+    "stationName": "노원구",
+    "dustValues": [
+        {
+            "pm10Value": "50",
+            "datetime": "13",
+            "pm10Grade": "2"
+        },
+        {
+            "pm10Value": "41",
+            "datetime": "12",
+            "pm10Grade": "2"
+        },
+        {
+            "pm10Value": "36",
+            "datetime": "11",
+            "pm10Grade": "2"
+        },
+        {
+            "pm10Value": "36",
+            "datetime": "10",
+            "pm10Grade": "2"
+        },
+        {
+            "pm10Value": "35",
+            "datetime": "09",
+            "pm10Grade": "2"
+        },
+        {
+            "pm10Value": "35",
+            "datetime": "08",
+            "pm10Grade": "2"
+        },
+        .....
 }
 ```
 
