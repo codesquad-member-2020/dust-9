@@ -23,6 +23,7 @@ import java.util.List;
 public class ApiDustController {
 
     private Logger logger = LoggerFactory.getLogger(ApiDustController.class);
+    private final String SERVEICE_KEY = "sk%2FDXfdYMcYzpqoqa%2FB3wfVChJB7GPbzZgxasEmcfvZogvbX0H77alhv2Ct%2FaXvRw63OsFrEP8MusiURY7xjAQ%3D%3D";
 
     @GetMapping("")
     public ModelAndView index() {
@@ -35,37 +36,18 @@ public class ApiDustController {
         logger.info("latitude : {}", latitude);
         logger.info("longitude : {}", longitude);
         String dongName = getDongNameFromCoordinate(latitude, longitude);
-        String[] coordinates = getTMCoordinateFromDongName(dongName);
+        List<String> coordinates = getTMCoordinateFromDongName(dongName);
 
-//        StringBuffer result = requestOpenApi(urlString);
-
-        StringBuffer result = new StringBuffer();
-        try {
-            String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?" +
-                    "stationName=" + "노원구" +
-                    "&dataTerm=daily" +
-                    "&pageNo=1" +
-                    "&numOfRows=24" +
-                    "&ServiceKey=sk%2FDXfdYMcYzpqoqa%2FB3wfVChJB7GPbzZgxasEmcfvZogvbX0H77alhv2Ct%2FaXvRw63OsFrEP8MusiURY7xjAQ%3D%3D" +
-                    "&ver=1.3" +
-                    "&_returnType=json";
-
-            URL url = new URL(urlString);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("GET");
-
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
-
-            String returnLine;
-            while ((returnLine = br.readLine()) != null) {
-                result.append(returnLine + "\n");
-            }
-            httpURLConnection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JSONObject rawDateFromOpenApi = (JSONObject) new JSONParser().parse(String.valueOf(result));
+        String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?" +
+                "stationName=" + "노원구" +
+                "&dataTerm=daily" +
+                "&pageNo=1" +
+                "&numOfRows=24" +
+                "&ServiceKey=" + SERVEICE_KEY +
+                "&ver=1.3" +
+                "&_returnType=json";
+        String result = requestOpenApi(urlString);
+        JSONObject rawDateFromOpenApi = (JSONObject) new JSONParser().parse(result);
         JSONArray secondDate = (JSONArray) rawDateFromOpenApi.get("list");
         JSONArray dustValues = new JSONArray();
         for (int count = 0; count < 24; count++) {
@@ -90,73 +72,37 @@ public class ApiDustController {
         return parsedData;
     }
 
-    private String[] getTMCoordinateFromDongName(String dongName) {
-        return new String[0];
+    private List<String> getTMCoordinateFromDongName(String dongName) throws ParseException {
+
+        String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getTMStdrCrdnt?" +
+                "umdName=" + dongName +
+                "&pageNo=1&numOfRows=1" +
+                "&ServiceKey=" + SERVEICE_KEY +
+                "&_returnType=json";
+        String result = requestOpenApi(urlString);
+        JSONObject rawDateFromOpenApi = (JSONObject) new JSONParser().parse(result);
+        JSONObject parsedData = ((JSONObject) ((JSONArray) rawDateFromOpenApi.get("list")).get(0));
+        String tmX = (String) parsedData.get("tmX");
+        String tmY = (String) parsedData.get("tmY");
+        List<String> coordinates = Arrays.asList(tmX, tmY);
+        coordinates.forEach(System.out::println);
+        return coordinates;
     }
 
     private String getDongNameFromCoordinate(String latitude, String longitude) throws ParseException {
+        String urlString = "http://api.vworld.kr/req/address?" +
+                "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
+                "&point=" + latitude + "," + longitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
+                "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
 
-        StringBuffer result = new StringBuffer();
-
-        try {
-            String urlString = "http://api.vworld.kr/req/address?" +
-                    "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
-                    "&point=" + latitude + "," + longitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
-                    "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
-
-            URL url = new URL(urlString);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("GET");
-
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
-
-            String returnLine;
-            while ((returnLine = br.readLine()) != null) {
-                result.append(returnLine + "\n");
-            }
-            httpURLConnection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(String.valueOf(result));
+        String result = requestOpenApi(urlString);
+        JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(result);
         logger.info("response : {}", rawDataFromAPI);
         JSONObject response = (JSONObject) rawDataFromAPI.get("response");
         String dongName = (String) (((JSONObject) ((JSONObject) ((JSONArray) response.get("result")).get(0)).get("structure"))).get("level4L");
         logger.info("dongName : {}", dongName);
         return dongName;
     }
-
-    @GetMapping("/geoInformation")
-    public JSONObject getGeo(@RequestParam(value = "latitude") String latitude,
-                             @RequestParam(value = "longitude") String longitude) throws ParseException {
-        StringBuffer result = new StringBuffer();
-
-        try {
-            String urlString = "http://api.vworld.kr/req/address?" +
-                    "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
-                    "&point=" + latitude + "," + longitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
-                    "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
-
-            URL url = new URL(urlString);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("GET");
-
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
-
-            String returnLine;
-            while ((returnLine = br.readLine()) != null) {
-                result.append(returnLine + "\n");
-            }
-            httpURLConnection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JSONObject geoInfo = (JSONObject) new JSONParser().parse(String.valueOf(result));
-        return geoInfo;
-    }
-
 
     @GetMapping("images")
     public JSONObject images() throws ParseException {
@@ -179,8 +125,25 @@ public class ApiDustController {
         return informaions;
     }
 
-//    private String requestOpenApi(String urlString) {
-////        return String.valueOf(result);
-//    }
+    private String requestOpenApi(String urlString) {
+        StringBuffer result = new StringBuffer();
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+            while ((returnLine = br.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            httpURLConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(result);
+    }
 
 }
