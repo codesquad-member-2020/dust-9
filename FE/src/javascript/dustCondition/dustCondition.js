@@ -1,5 +1,8 @@
 import {fetchRequest} from "../util/fetchrequest.js"
 
+let fetchdata ;
+let currentIndex=0;
+
 const render = () => {
   const content = document.querySelector(".content");
   const dustCondition = `<div class="dustCondition">
@@ -22,21 +25,32 @@ const render = () => {
 };
 
 const init = () => {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    const requestURL = `https://dev-angelo.dlinkddns.com:8090/location?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`;
+    const requestURL = `http://dust9.herokuapp.com/location?latitude=37.4756824&longitude=126.97742860000001`;
     fetchRequest(requestURL, "GET")
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        renderDustInfo(data);
+        fetchdata = data;
+        renderDustInfo(data,0);
+        registerEventListener();
       });
-  });
 };
 
-const registerEventListener = () => {};
+const registerEventListener = () => {
+  const dustGraph = document.querySelector(".dustGraph");
 
-function renderDustInfo(data){
+  dustGraph.addEventListener('scroll',e=>{
+    let scrollTop = e.target.scrollTop;
+    currentIndex = Math.floor(scrollTop/(208/fetchdata.dustValues.length));
+    if(currentIndex>=fetchdata.dustValues.length) return;
 
+    renderDustInfo(fetchdata,currentIndex);
+  })
+};
+
+
+
+
+function renderDustInfo(data, index) {
   const gradeEmoji = document.querySelector(".gradeEmoji");
   const grade = document.querySelector(".grade");
   const dustValue = document.querySelector(".dustValue");
@@ -44,22 +58,29 @@ function renderDustInfo(data){
   const stationName = document.querySelector(".stationName");
   const dustInfo = document.querySelector(".dustInfo");
 
-  let gradeDisplay = setGradeDisplay(data.dustValues[0].pm10Grade);
+  let gradeDisplay = setGradeDisplay(data.dustValues[index].pm10Grade);
 
   dustInfo.style.background = `linear-gradient(to top,white, ${gradeDisplay.background})`;
   grade.innerHTML = gradeDisplay.grade;
   gradeEmoji.innerHTML = gradeDisplay.emoji;
 
-  dustValue.innerHTML = data.dustValues[0].pm10Value+'&micro;g/㎥';
+  dustValue.innerHTML = data.dustValues[index].pm10Value + "&micro;g/㎥";
   stationName.innerHTML = data.stationName;
-  timeValue.innerHTML = '오늘 '+data.dustValues[0].dataTime+':00';
+
+  timeValue.innerHTML = "오늘 "+data.dustValues[index].datetime + ":00";
+
 
   //그래프 영역
-  const dustGraph = document.querySelector('.dustGraph');
+  const dustGraph = document.querySelector(".dustGraph");
   const graphUl = makeGraphHTML(data);
   dustGraph.innerHTML = graphUl;
   makeGraph(data);
+
+  const graph = document.querySelectorAll(".graph");
+  graph[index].style.opacity = "0.5";
+
 }
+
 
 function makeGraphHTML(data){
   const graphLi = data.dustValues.reduce(
@@ -79,10 +100,12 @@ function makeGraph(data){
     let valueWidth = graphWidth/200*dustValue;
 
     let gradeDisplay = setGradeDisplay(data.dustValues[i].pm10Grade);
+
+    if(Math.round(valueWidth)>=graphWidth) valueWidth = graphWidth-1;
     graph[i].style.width = `${valueWidth}px`;
     graph[i].style.background = gradeDisplay.graphColor;
   }
-  
+
 }
 
 function setGradeDisplay(gradeValue) {
