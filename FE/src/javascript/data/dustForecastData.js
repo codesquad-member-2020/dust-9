@@ -11,6 +11,16 @@ const dustForecastData = (function()
         registerObserver(observer) {
             forecastDataObserver.push(observer);
         },
+        unregisterObserver(observer) {
+            const object = forecastDataObserver.find(registeredObserber => 
+                registeredObserber === observer
+            );
+
+            const index = forecastDataObserver.indexOf(object);
+
+            if (index > -1) 
+                forecastDataObserver.splice(index, 1)
+        },
         changeCurrentXPosition: function(position) {
             if (currentXPosition === position)
                 return;

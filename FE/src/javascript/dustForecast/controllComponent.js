@@ -2,8 +2,8 @@ import CLASS_NAME from "../constants/className.js"
 import {dustForecastData} from "../data/dustForecastData.js"
 
 const initXPosition = 0;
-let _startX = initXPosition;
-let _pivotX = initXPosition;
+let _startXPosition = initXPosition;
+let _previousXPosition = initXPosition;
 let _animationTimer = null;
 
 const render = () => {
@@ -24,28 +24,27 @@ const render = () => {
 const stop = () => {
   stopIndicator();
 
-  _startX = initXPosition;
-  _pivotX = initXPosition;
+  _startXPosition = initXPosition;
+  _previousXPosition = initXPosition;
 }
 
 const stopIndicator = () => {
   clearTimeout(_animationTimer);
   _animationTimer = null;
   const indicator = document.querySelector('.indicator')
-  _pivotX = parseInt(indicator.style.marginLeft);
+  _previousXPosition = parseInt(indicator.style.marginLeft);
 }
 
 const moveIndicator = () => {
-  let leftpos = _pivotX
-  const fps = 60
+  let leftpos = _previousXPosition;
+  const fps = 60;
 
   function moveIndicator(timestamp) {
       _animationTimer = setTimeout(function () {
-          leftpos += 1;
-          dustForecastData.changeCurrentXPosition(leftpos);
-
-          if (leftpos < 299) {
-              requestAnimationFrame(moveIndicator)
+          if (leftpos < 298) {
+            leftpos += 1;
+            dustForecastData.changeCurrentXPosition(leftpos);
+            requestAnimationFrame(moveIndicator)
           }
       }, 1000 / fps)
   }
@@ -98,23 +97,23 @@ const playPauseTouchEndHandler = evt => {
 
 const barTouchEndHandler = evt => {
   const calculatedValue = evt.changedTouches[0].clientX - evt.target.getBoundingClientRect().left;
-  _pivotX = calculatedValue;
+  _previousXPosition = calculatedValue;
   dustForecastData.changeCurrentXPosition(evt.changedTouches[0].clientX - evt.target.getBoundingClientRect().left);
 }
 
 const indicatorTouchStartHandler = evt => {
-  _startX = evt.touches[0].clientX;
-  _pivotX = parseInt(evt.target.style.marginLeft);
+  _startXPosition = evt.touches[0].clientX;
+  _previousXPosition = parseInt(evt.target.style.marginLeft);
 }
 
 const indicatorTouchMoveHandler = evt => {
-  const calculatedValue = evt.touches[0].clientX - _startX + _pivotX;
+  const calculatedValue = evt.touches[0].clientX - _startXPosition + _previousXPosition;
   dustForecastData.changeCurrentXPosition(calculatedValue);
 }
 
 const indicatorTouchEndHandler = evt => {
-  const calculatedValue = evt.changedTouches[0].clientX - _startX + _pivotX;
-  _pivotX = calculatedValue;
+  const calculatedValue = evt.changedTouches[0].clientX - _startXPosition + _previousXPosition;
+  _previousXPosition = calculatedValue;
 }
 
 const onNotifyCurrentXPositionChanged = (currentXPosition) => {
