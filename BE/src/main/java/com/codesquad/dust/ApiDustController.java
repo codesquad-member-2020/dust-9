@@ -110,7 +110,7 @@ public class ApiDustController {
     private String getDongNameFromCoordinate(String latitude, String longitude) throws ParseException {
         String urlString = "http://api.vworld.kr/req/address?" +
                 "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
-                "&point=" + latitude + "," + longitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
+                "&point=" + longitude + "," + latitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
                 "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
 
         String result = requestOpenApi(urlString);
