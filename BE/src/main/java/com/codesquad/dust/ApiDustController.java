@@ -34,11 +34,15 @@ public class ApiDustController {
                                @RequestParam(value = "longitude") String longitude) throws ParseException {
         logger.info("latitude : {}", latitude);
         logger.info("longitude : {}", longitude);
+        String dongName = getDongNameFromCoordinate(latitude, longitude);
+        String[] coordinates = getTMCoordinateFromDongName(dongName);
+
+//        StringBuffer result = requestOpenApi(urlString);
 
         StringBuffer result = new StringBuffer();
         try {
             String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?" +
-                    "stationName=노원구" +
+                    "stationName=" + "노원구" +
                     "&dataTerm=daily" +
                     "&pageNo=1" +
                     "&numOfRows=24" +
@@ -86,6 +90,43 @@ public class ApiDustController {
         return parsedData;
     }
 
+    private String[] getTMCoordinateFromDongName(String dongName) {
+        return new String[0];
+    }
+
+    private String getDongNameFromCoordinate(String latitude, String longitude) throws ParseException {
+
+        StringBuffer result = new StringBuffer();
+
+        try {
+            String urlString = "http://api.vworld.kr/req/address?" +
+                    "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
+                    "&point=" + latitude + "," + longitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
+                    "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
+
+            URL url = new URL(urlString);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+            while ((returnLine = br.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            httpURLConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(String.valueOf(result));
+        logger.info("response : {}", rawDataFromAPI);
+        JSONObject response = (JSONObject) rawDataFromAPI.get("response");
+        String dongName = (String) (((JSONObject) ((JSONObject) ((JSONArray) response.get("result")).get(0)).get("structure"))).get("level4L");
+        logger.info("dongName : {}", dongName);
+        return dongName;
+    }
+
     @GetMapping("/geoInformation")
     public JSONObject getGeo(@RequestParam(value = "latitude") String latitude,
                              @RequestParam(value = "longitude") String longitude) throws ParseException {
@@ -116,6 +157,7 @@ public class ApiDustController {
         return geoInfo;
     }
 
+
     @GetMapping("images")
     public JSONObject images() throws ParseException {
         List<String> imageUrls = Arrays.asList("http://dev-angelo.dlinkddns.com/0401_00.png", "http://dev-angelo.dlinkddns.com/0401_01.png", "http://dev-angelo.dlinkddns.com/0401_02.png", "http://dev-angelo.dlinkddns.com/0401_03.png", "http://dev-angelo.dlinkddns.com/0401_04.png", "http://dev-angelo.dlinkddns.com/0401_05.png", "http://dev-angelo.dlinkddns.com/0401_06.png", "http://dev-angelo.dlinkddns.com/0401_07.png", "http://dev-angelo.dlinkddns.com/0401_08.png", "http://dev-angelo.dlinkddns.com/0401_09.png", "http://dev-angelo.dlinkddns.com/0401_10.png", "http://dev-angelo.dlinkddns.com/0401_11.png", "http://dev-angelo.dlinkddns.com/0401_12.png", "http://dev-angelo.dlinkddns.com/0401_13.png", "http://dev-angelo.dlinkddns.com/0401_14.png", "http://dev-angelo.dlinkddns.com/0401_15.png", "http://dev-angelo.dlinkddns.com/0401_16.png", "http://dev-angelo.dlinkddns.com/0401_17.png", "http://dev-angelo.dlinkddns.com/0401_18.png", "http://dev-angelo.dlinkddns.com/0401_19.png", "http://dev-angelo.dlinkddns.com/0401_20.png", "http://dev-angelo.dlinkddns.com/0401_21.png", "http://dev-angelo.dlinkddns.com/0401_22.png", "http://dev-angelo.dlinkddns.com/0401_23.png");
@@ -136,4 +178,9 @@ public class ApiDustController {
         informaions.put("informGrade", informGrade);
         return informaions;
     }
+
+//    private String requestOpenApi(String urlString) {
+////        return String.valueOf(result);
+//    }
+
 }
