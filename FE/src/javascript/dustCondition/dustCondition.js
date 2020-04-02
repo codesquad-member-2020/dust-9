@@ -53,6 +53,36 @@ function renderDustInfo(data){
   dustValue.innerHTML = data.dustValues[0].pm10Value+'&micro;g/㎥';
   stationName.innerHTML = data.stationName;
   timeValue.innerHTML = '오늘 '+data.dustValues[0].dataTime+':00';
+
+  //그래프 영역
+  const dustGraph = document.querySelector('.dustGraph');
+  const graphUl = makeGraphHTML(data);
+  dustGraph.innerHTML = graphUl;
+  makeGraph(data);
+}
+
+function makeGraphHTML(data){
+  const graphLi = data.dustValues.reduce(
+    (render, dustValue) => (render += ` <li class="graphLi"><div class="graph">${dustValue.pm10Value}</div></li>`),
+    ""
+  );
+  return `<ul>${graphLi}</ul>`;
+}
+
+function makeGraph(data){
+  const graph = document.querySelectorAll('.graph');
+  const graphLi = document.querySelectorAll('.graphLi');
+
+  for(let i = 0; i<graph.length;i++){
+    let graphWidth = graphLi[i].offsetWidth;
+    let dustValue = Number(data.dustValues[i].pm10Value);
+    let valueWidth = graphWidth/200*dustValue;
+
+    let gradeDisplay = setGradeDisplay(data.dustValues[i].pm10Grade);
+    graph[i].style.width = `${valueWidth}px`;
+    graph[i].style.background = gradeDisplay.graphColor;
+  }
+  
 }
 
 function setGradeDisplay(gradeValue) {
@@ -67,21 +97,25 @@ function setGradeDisplay(gradeValue) {
       gradeDisplay.emoji='😀';
       gradeDisplay.grade='좋음';
       gradeDisplay.background='#6096D8';
+      gradeDisplay.graphColor ='#0080FF';
       break;
     case '2':
       gradeDisplay.emoji='🙂';
       gradeDisplay.grade='보통';
       gradeDisplay.background='#088A68';
+      gradeDisplay.graphColor ='#04B404';
       break;
     case '3':
       gradeDisplay.emoji='😷';
       gradeDisplay.grade='나쁨';
       gradeDisplay.background='#FAAC58';
+      gradeDisplay.graphColor ='#FE9A2E';
       break;
     case '4':
       gradeDisplay.emoji='😱';
       gradeDisplay.grade='매우 나쁨';
       gradeDisplay.background='#FA5858';
+      gradeDisplay.graphColor ='#DF0101';
       break;
   }
   return gradeDisplay;

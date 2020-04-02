@@ -39,16 +39,15 @@
   overflow: scroll;
 }
 .dustCondition > .dustGraph > ul >li  {
-  border: solid 0.1px #F2F2F2;
+  height: 20px;
+  border: solid 0.5px #F2F2F2;
   text-align: right;
-  padding-right: 10px;
-}
-.dustCondition > .dustGraph > ul > li > .graphValue{
-  position: relative;
+  overflow: scroll;
 }
 .dustCondition > .dustGraph > ul > li > .graph{
-  position: absolute;
-}
+  height: 100%;
+  padding-right: 5px;
+  box-sizing: border-box;}
 
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
