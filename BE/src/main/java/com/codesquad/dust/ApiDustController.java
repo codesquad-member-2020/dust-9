@@ -110,10 +110,6 @@ public class ApiDustController {
     }
 
     private String getDongNameFromCoordinate(String latitude, String longitude) throws ParseException, UnsupportedEncodingException {
-//        String urlString = "http://api.vworld.kr/req/address?" +
-//                "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
-//                "&point=" + longitude + "," + latitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
-//                "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
         StringBuilder urlBuilder = new StringBuilder("http://api.vworld.kr/req/address");
         urlBuilder.append("?").append(URLEncoder.encode("service", "UTF-8")).append("=").append("address");
         urlBuilder.append("&").append(URLEncoder.encode("request", "UTF-8")).append("=").append("getAddress");
