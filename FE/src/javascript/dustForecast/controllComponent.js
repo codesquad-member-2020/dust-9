@@ -2,16 +2,16 @@ import CLASS_NAME from "../constants/className.js"
 import {dustForecastData} from "../data/dustForecastData.js"
 
 const initXPosition = 0;
-let _startX = initXPosition;
-let _pivotX = initXPosition;
+let _startXPosition = initXPosition;
+let _previousXPosition = initXPosition;
 let _animationTimer = null;
+let _isPlaying = false;
 
 const render = () => {
     return `
     <div class="controll">
       <div class="playpause">
-        <input class="toggleButton" type="checkbox" value="None" id="playpause" name="check" />
-        <label for="playpause"></label>
+        <img class="play" id="playPauseButton">
       </div>
       <div class="scrollBar">
         <div class="bar"></div>
@@ -24,28 +24,33 @@ const render = () => {
 const stop = () => {
   stopIndicator();
 
-  _startX = initXPosition;
-  _pivotX = initXPosition;
+  _startXPosition = initXPosition;
+  _previousXPosition = initXPosition;
 }
 
 const stopIndicator = () => {
+  _isPlaying = false;
+  togglePlayPauseImage(_isPlaying);
+
   clearTimeout(_animationTimer);
   _animationTimer = null;
+
   const indicator = document.querySelector('.indicator')
-  _pivotX = parseInt(indicator.style.marginLeft);
+  _previousXPosition = parseInt(indicator.style.marginLeft);
 }
 
 const moveIndicator = () => {
-  let leftpos = _pivotX
-  const fps = 60
+  _isPlaying = true;
+  togglePlayPauseImage(_isPlaying);
+  let leftpos = _previousXPosition;
+  const fps = 60;
 
   function moveIndicator(timestamp) {
       _animationTimer = setTimeout(function () {
-          leftpos += 1;
-          dustForecastData.changeCurrentXPosition(leftpos);
-
           if (leftpos < 299) {
-              requestAnimationFrame(moveIndicator)
+            leftpos += 1;
+            dustForecastData.changeCurrentXPosition(leftpos);
+            requestAnimationFrame(moveIndicator)
           }
       }, 1000 / fps)
   }
@@ -60,66 +65,78 @@ const registerEventListener = () => {
   button.style.marginLeft = '0px';
 
   scrollBar.addEventListener('touchstart', evt => {
-      stopIndicator();
+    stopIndicator();
 
-      if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
-          indicatorTouchStartHandler(evt);
-      }
+    if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
+      indicatorTouchStartHandler(evt);
+    }
   });
 
   scrollBar.addEventListener('touchmove', evt => {
-      if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
-          indicatorTouchMoveHandler(evt);
-      }
+    if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
+      indicatorTouchMoveHandler(evt);
+    }
   });
 
   scrollBar.addEventListener('touchend', evt => {
-      if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
-          indicatorTouchEndHandler(evt);
-      }
-      else if (evt.target.className === CLASS_NAME.DUST_FORECAST.BAR) {
-          barTouchEndHandler(evt);
-      }
+    if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
+      indicatorTouchEndHandler(evt);
+    }
+    else if (evt.target.className === CLASS_NAME.DUST_FORECAST.BAR) {
+      barTouchEndHandler(evt);
+    }
   });
 
   playpause.addEventListener('touchend', evt => {
-      playPauseTouchEndHandler(evt.target.previousElementSibling)
+    playPauseTouchEndHandler()
   })
 }
 
-const playPauseTouchEndHandler = evt => {
-  if (evt.checked === true) {
-      moveIndicator();
+const playPauseTouchEndHandler = () => {
+  if (_isPlaying) {
+    stopIndicator();
   }
   else {
-      stopIndicator();
+    moveIndicator();
   }
 }
 
 const barTouchEndHandler = evt => {
   const calculatedValue = evt.changedTouches[0].clientX - evt.target.getBoundingClientRect().left;
-  _pivotX = calculatedValue;
+  _previousXPosition = calculatedValue;
   dustForecastData.changeCurrentXPosition(evt.changedTouches[0].clientX - evt.target.getBoundingClientRect().left);
 }
 
 const indicatorTouchStartHandler = evt => {
-  _startX = evt.touches[0].clientX;
-  _pivotX = parseInt(evt.target.style.marginLeft);
+  _startXPosition = evt.touches[0].clientX;
+  _previousXPosition = parseInt(evt.target.style.marginLeft);
 }
 
 const indicatorTouchMoveHandler = evt => {
-  const calculatedValue = evt.touches[0].clientX - _startX + _pivotX;
+  const calculatedValue = evt.touches[0].clientX - _startXPosition + _previousXPosition;
   dustForecastData.changeCurrentXPosition(calculatedValue);
 }
 
 const indicatorTouchEndHandler = evt => {
-  const calculatedValue = evt.changedTouches[0].clientX - _startX + _pivotX;
-  _pivotX = calculatedValue;
+  const calculatedValue = evt.changedTouches[0].clientX - _startXPosition + _previousXPosition;
+  _previousXPosition = calculatedValue;
 }
 
 const onNotifyCurrentXPositionChanged = (currentXPosition) => {
   const button = document.querySelector(".scrollBar button");
   button.style.marginLeft = currentXPosition + 'px';
+}
+
+const togglePlayPauseImage = isPlaying => {
+  const playPauseButton = document.getElementById("playPauseButton");
+  playPauseButton.classList.remove(playPauseButton.classList);
+
+  if (isPlaying) {
+    playPauseButton.classList.add('pause');
+  }
+  else {
+    playPauseButton.classList.add('play');
+  }
 }
 
 

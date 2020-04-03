@@ -4,6 +4,7 @@ const _maxXPosition = 300;
 const render = () => {
     return `
     <div class="imageArea">
+        <img src="https://1.bp.blogspot.com/-yIhXlQfYN1E/WMksG192LLI/AAAAAAAAA9w/txsqdQfykVksDEFshayeN54c0Gu6C3AAwCLcB/s1600/glow.gif" alt="Loading Image">
     </div>
     `;
 }

@@ -15,7 +15,7 @@ const navigationTouchEndHandler = (index) => {
         dustForecast.init();
     }
     else {
-        dustForecast.stop();
+        dustForecast.finalize();
         dustCondition.render();
         dustCondition.init();
     }
