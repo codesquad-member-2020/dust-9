@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ApiDustController {
 
     @GetMapping("/location")
     public JSONObject stations(@RequestParam(value = "latitude") String latitude,
-                               @RequestParam(value = "longitude") String longitude) throws ParseException {
+                               @RequestParam(value = "longitude") String longitude) throws ParseException, UnsupportedEncodingException {
         logger.info("latitude : {}", latitude);
         logger.info("longitude : {}", longitude);
         String dongName = getDongNameFromCoordinate(latitude, longitude);
@@ -107,11 +109,24 @@ public class ApiDustController {
         return coordinates;
     }
 
-    private String getDongNameFromCoordinate(String latitude, String longitude) throws ParseException {
-        String urlString = "http://api.vworld.kr/req/address?" +
-                "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
-                "&point=" + longitude + "," + latitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
-                "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
+    private String getDongNameFromCoordinate(String latitude, String longitude) throws ParseException, UnsupportedEncodingException {
+//        String urlString = "http://api.vworld.kr/req/address?" +
+//                "service=address&request=getAddress&version=2.0&crs=epsg:4326" +
+//                "&point=" + longitude + "," + latitude + "&format=json&type=PARCEL&zipcode=true&simple=true" +
+//                "&key=AAC8C667-87DE-333E-BF82-68EB6EC3A8DC";
+        StringBuilder urlBuilder = new StringBuilder("http://api.vworld.kr/req/address");
+        urlBuilder.append("?").append(URLEncoder.encode("service", "UTF-8")).append("=").append("address");
+        urlBuilder.append("&").append(URLEncoder.encode("request", "UTF-8")).append("=").append("getAddress");
+        urlBuilder.append("&").append(URLEncoder.encode("version", "UTF-8")).append("=").append("2.0");
+        urlBuilder.append("&").append(URLEncoder.encode("crs", "UTF-8")).append("=").append("epsg:4326");
+        urlBuilder.append("&").append(URLEncoder.encode("point", "UTF-8")).append("=").append(longitude).append(",").append(latitude);
+        urlBuilder.append("&").append(URLEncoder.encode("format", "UTF-8")).append("=").append("json");
+        urlBuilder.append("&").append(URLEncoder.encode("type", "UTF-8")).append("=").append("PARCEL");
+        urlBuilder.append("&").append(URLEncoder.encode("zipcode", "UTF-8")).append("=").append("true");
+        urlBuilder.append("&").append(URLEncoder.encode("simple", "UTF-8")).append("=").append("true");
+        urlBuilder.append("&").append(URLEncoder.encode("key", "UTF-8")).append("=").append("AAC8C667-87DE-333E-BF82-68EB6EC3A8DC");
+        String urlString = urlBuilder.toString();
+        logger.info("urlString : {}", urlString);
 
         String result = requestOpenApi(urlString);
         JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(result);
