@@ -29,7 +29,7 @@ const render = () => {
 };
 
 const init = () => {
-    const requestURL = `http://dust99.herokuapp.com/location?latitude=37.4756824&longitude=126.97742860000001`;
+    const requestURL = `http://52.79.74.109:8080/location?latitude=37.4756824&longitude=126.97742860000001`;
     fetchRequest(requestURL, "GET")
       .then(response => response.json())
       .then(data => {
@@ -60,12 +60,12 @@ function renderDustInfo(data, index) {
   const stationName = document.querySelector(".stationName");
   const dustInfo = document.querySelector(".dustInfo");
 
+  //미세먼지 등급
   let gradeDisplay = dustGradeSetting.setGradeDisplay(data.dustValues[index].pm10Grade);
 
   dustInfo.style.background = `linear-gradient(to top,white, ${gradeDisplay.background})`;
   grade.innerHTML = gradeDisplay.grade;
   gradeEmoji.innerHTML = gradeDisplay.emoji;
-
   dustValue.innerHTML = data.dustValues[index].pm10Value + "&micro;g/㎥";
   stationName.innerHTML = data.stationName;
 
@@ -73,8 +73,7 @@ function renderDustInfo(data, index) {
   if(data.dustValues[index].datetime==="01") date = "오늘 "
   timeValue.innerHTML = date+data.dustValues[index].datetime + ":00";
 
-
-  //그래프 영역
+  //미세먼지 그래프
   const dustGraph = document.querySelector(".dustGraph");
   const graphUl = dustGraphComponent.makeGraphHTML(data);
   dustGraph.innerHTML = graphUl;
