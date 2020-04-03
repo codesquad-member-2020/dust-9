@@ -141,13 +141,18 @@ public class ApiDustController {
     private String requestOpenApi(String urlString) {
         StringBuilder result = new StringBuilder();
         try {
+            logger.info("url 만들기 전 로그");
             URL url = new URL(urlString);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Content-type", "application/json");
+            httpURLConnection.setConnectTimeout(1000);
+            logger.info("연결 전 로그");
+
 
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(httpURLConnection.getInputStream()));
+            logger.info("연결 성공?");
 
             String returnLine;
             while ((returnLine = br.readLine()) != null) {
