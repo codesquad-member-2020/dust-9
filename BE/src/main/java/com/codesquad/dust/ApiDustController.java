@@ -124,14 +124,15 @@ public class ApiDustController {
     }
 
     private String requestOpenApi(String urlString) {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         try {
             URL url = new URL(urlString);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Content-type", "application/json");
 
             BufferedReader br = new BufferedReader(
-                    new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8"));
+                    new InputStreamReader(httpURLConnection.getInputStream()));
 
             String returnLine;
             while ((returnLine = br.readLine()) != null) {
