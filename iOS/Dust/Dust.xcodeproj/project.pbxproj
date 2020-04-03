@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7818B7B72435CEDA0079D62C /* DustInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7818B7B62435CEDA0079D62C /* DustInformationManager.swift */; };
+		78316B8324348E5300087886 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78316B8224348E5300087886 /* Constants.swift */; };
+		78316B852434AE2900087886 /* DustInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78316B842434AE2900087886 /* DustInformation.swift */; };
 		78817368243208E700CC0BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78817367243208E700CC0BD6 /* AppDelegate.swift */; };
 		7881736A243208E700CC0BD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78817369243208E700CC0BD6 /* SceneDelegate.swift */; };
 		7881736F243208E700CC0BD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7881736D243208E700CC0BD6 /* Main.storyboard */; };
 		78817371243208E900CC0BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78817370243208E900CC0BD6 /* Assets.xcassets */; };
 		78817374243208E900CC0BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78817372243208E900CC0BD6 /* LaunchScreen.storyboard */; };
 		7881737F243208E900CC0BD6 /* DustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7881737E243208E900CC0BD6 /* DustTests.swift */; };
-		78CEB51C24332B220091154B /* DustTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51B24332B220091154B /* DustTableViewController.swift */; };
+		78CEB51C24332B220091154B /* DustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51B24332B220091154B /* DustViewController.swift */; };
 		78CEB51E24332C8D0091154B /* DustTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */; };
 		78CEB52024332D080091154B /* DustTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB51F24332D080091154B /* DustTableViewDataSource.swift */; };
 		78CEB52324332D760091154B /* DustTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEB52124332D760091154B /* DustTableViewCell.swift */; };
 		78CEB52424332D760091154B /* DustTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CEB52224332D760091154B /* DustTableViewCell.xib */; };
+		78D9A5F92436AB2400EC356C /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9A5F82436AB2400EC356C /* ForecastViewController.swift */; };
+		78D9A5FB2436ADDF00EC356C /* ForecastInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D9A5FA2436ADDF00EC356C /* ForecastInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7818B7B62435CEDA0079D62C /* DustInformationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustInformationManager.swift; sourceTree = "<group>"; };
+		78316B8224348E5300087886 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		78316B842434AE2900087886 /* DustInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustInformation.swift; sourceTree = "<group>"; };
 		78817364243208E700CC0BD6 /* Dust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78817367243208E700CC0BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78817369243208E700CC0BD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,11 +49,13 @@
 		7881737A243208E900CC0BD6 /* DustTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DustTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7881737E243208E900CC0BD6 /* DustTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTests.swift; sourceTree = "<group>"; };
 		78817380243208E900CC0BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78CEB51B24332B220091154B /* DustTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewController.swift; sourceTree = "<group>"; };
+		78CEB51B24332B220091154B /* DustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustViewController.swift; sourceTree = "<group>"; };
 		78CEB51D24332C8D0091154B /* DustTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewDelegate.swift; sourceTree = "<group>"; };
 		78CEB51F24332D080091154B /* DustTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewDataSource.swift; sourceTree = "<group>"; };
 		78CEB52124332D760091154B /* DustTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustTableViewCell.swift; sourceTree = "<group>"; };
 		78CEB52224332D760091154B /* DustTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DustTableViewCell.xib; sourceTree = "<group>"; };
+		78D9A5F82436AB2400EC356C /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
+		78D9A5FA2436ADDF00EC356C /* ForecastInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +108,7 @@
 				78817370243208E900CC0BD6 /* Assets.xcassets */,
 				78817372243208E900CC0BD6 /* LaunchScreen.storyboard */,
 				78817375243208E900CC0BD6 /* Info.plist */,
+				78316B8224348E5300087886 /* Constants.swift */,
 			);
 			path = Dust;
 			sourceTree = "<group>";
@@ -114,6 +125,9 @@
 		78CEB51824332AE40091154B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				78316B842434AE2900087886 /* DustInformation.swift */,
+				7818B7B62435CEDA0079D62C /* DustInformationManager.swift */,
+				78D9A5FA2436ADDF00EC356C /* ForecastInformation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,7 +144,8 @@
 		78CEB51A24332AF40091154B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				78CEB51B24332B220091154B /* DustTableViewController.swift */,
+				78CEB51B24332B220091154B /* DustViewController.swift */,
+				78D9A5F82436AB2400EC356C /* ForecastViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -238,10 +253,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				78817368243208E700CC0BD6 /* AppDelegate.swift in Sources */,
+				78D9A5FB2436ADDF00EC356C /* ForecastInformation.swift in Sources */,
 				78CEB52024332D080091154B /* DustTableViewDataSource.swift in Sources */,
-				78CEB51C24332B220091154B /* DustTableViewController.swift in Sources */,
+				78CEB51C24332B220091154B /* DustViewController.swift in Sources */,
 				78CEB51E24332C8D0091154B /* DustTableViewDelegate.swift in Sources */,
+				78316B8324348E5300087886 /* Constants.swift in Sources */,
+				7818B7B72435CEDA0079D62C /* DustInformationManager.swift in Sources */,
 				7881736A243208E700CC0BD6 /* SceneDelegate.swift in Sources */,
+				78D9A5F92436AB2400EC356C /* ForecastViewController.swift in Sources */,
+				78316B852434AE2900087886 /* DustInformation.swift in Sources */,
 				78CEB52324332D760091154B /* DustTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
