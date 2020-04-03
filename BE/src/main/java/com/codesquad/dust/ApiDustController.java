@@ -167,9 +167,9 @@ public class ApiDustController {
 
     @GetMapping("images")
     public JSONObject images() throws ParseException {
-        String informData = "2020-04-02";
+        String informData = "2020-04-03";
         String informCode = "PM10";
-        String dataTime = "2020-04-02 11시 발표";
+        String dataTime = "2020-04-03 11시 발표";
         String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMinuDustFrcstDspth?" +
                 "searchDate=" + informData +
                 "&ServiceKey=" + SERVEICE_KEY +
@@ -206,9 +206,9 @@ public class ApiDustController {
 
     @GetMapping("information")
     public JSONObject information() throws ParseException {
-        String informData = "2020-04-02";
+        String informData = "2020-04-03";
         String informCode = "PM10";
-        String dataTime = "2020-04-02 11시 발표";
+        String dataTime = "2020-04-03 11시 발표";
         String urlString = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMinuDustFrcstDspth?" +
                 "searchDate=" + informData +
                 "&ServiceKey=" + SERVEICE_KEY +
