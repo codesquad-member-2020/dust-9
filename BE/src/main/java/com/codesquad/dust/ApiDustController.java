@@ -146,7 +146,7 @@ public class ApiDustController {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Content-type", "application/json");
-            httpURLConnection.setConnectTimeout(1000);
+            httpURLConnection.setConnectTimeout(7000);
             logger.info("연결 전 로그");
 
 
