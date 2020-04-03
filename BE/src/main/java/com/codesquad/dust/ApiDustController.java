@@ -128,6 +128,7 @@ public class ApiDustController {
         String urlString = urlBuilder.toString();
         logger.info("urlString : {}", urlString);
 
+
         String result = requestOpenApi(urlString);
         JSONObject rawDataFromAPI = (JSONObject) new JSONParser().parse(result);
         logger.info("response : {}", rawDataFromAPI);
