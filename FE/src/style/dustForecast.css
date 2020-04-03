@@ -41,30 +41,20 @@
   float: left;
 }
 
-.dustForecast > .controll > .playpause > label{
-    display: block;
-    box-sizing: border-box;
-    width: 0;
-    height: 37px;
-    margin-left: 20px;
-    border-color: transparent transparent transparent #202020;
-    transition: 100ms all ease;
-    cursor: pointer;
-    border-style: double;
-    border-width: 0 0 0 30px;
+.dustForecast > .controll > .playpause > .play{
+  background: url("https://image.flaticon.com/icons/svg/254/254434.svg") center no-repeat;
+  margin-left: 15px;
+  width: 50px;
+  height: 70px;
+  float: left;
 }
 
-.dustForecast > .controll > .playpause > label:active{
-  border-color: transparent transparent transparent darkgray;
-}
-
-.dustForecast > .controll > .playpause > :checked + label{
-  border-style: solid;
-  border-width: 18px 0 18px 30px;
-}
-
-.dustForecast > .controll > .playpause > input[type="checkbox"]{
-  visibility: hidden;
+.dustForecast > .controll > .playpause > .pause{
+  background: url("https://image.flaticon.com/icons/svg/633/633940.svg") center no-repeat;
+  margin-left: 15px;
+  width: 50px;
+  height: 70px;
+  float: left;
 }
 
 .dustForecast > .controll > .scrollBar{

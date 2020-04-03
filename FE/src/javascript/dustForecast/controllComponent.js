@@ -5,13 +5,13 @@ const initXPosition = 0;
 let _startXPosition = initXPosition;
 let _previousXPosition = initXPosition;
 let _animationTimer = null;
+let _isPlaying = false;
 
 const render = () => {
     return `
     <div class="controll">
       <div class="playpause">
-        <input class="toggleButton" type="checkbox" value="None" id="playpause" name="check" />
-        <label for="playpause"></label>
+        <img class="play" id="playPauseButton">
       </div>
       <div class="scrollBar">
         <div class="bar"></div>
@@ -29,19 +29,25 @@ const stop = () => {
 }
 
 const stopIndicator = () => {
+  _isPlaying = false;
+  togglePlayPauseImage(_isPlaying);
+
   clearTimeout(_animationTimer);
   _animationTimer = null;
+
   const indicator = document.querySelector('.indicator')
   _previousXPosition = parseInt(indicator.style.marginLeft);
 }
 
 const moveIndicator = () => {
+  _isPlaying = true;
+  togglePlayPauseImage(_isPlaying);
   let leftpos = _previousXPosition;
   const fps = 60;
 
   function moveIndicator(timestamp) {
       _animationTimer = setTimeout(function () {
-          if (leftpos < 298) {
+          if (leftpos < 299) {
             leftpos += 1;
             dustForecastData.changeCurrentXPosition(leftpos);
             requestAnimationFrame(moveIndicator)
@@ -59,39 +65,39 @@ const registerEventListener = () => {
   button.style.marginLeft = '0px';
 
   scrollBar.addEventListener('touchstart', evt => {
-      stopIndicator();
+    stopIndicator();
 
-      if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
-          indicatorTouchStartHandler(evt);
-      }
+    if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
+      indicatorTouchStartHandler(evt);
+    }
   });
 
   scrollBar.addEventListener('touchmove', evt => {
-      if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
-          indicatorTouchMoveHandler(evt);
-      }
+    if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
+      indicatorTouchMoveHandler(evt);
+    }
   });
 
   scrollBar.addEventListener('touchend', evt => {
-      if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
-          indicatorTouchEndHandler(evt);
-      }
-      else if (evt.target.className === CLASS_NAME.DUST_FORECAST.BAR) {
-          barTouchEndHandler(evt);
-      }
+    if (evt.target.className === CLASS_NAME.DUST_FORECAST.INDICATOR) {
+      indicatorTouchEndHandler(evt);
+    }
+    else if (evt.target.className === CLASS_NAME.DUST_FORECAST.BAR) {
+      barTouchEndHandler(evt);
+    }
   });
 
   playpause.addEventListener('touchend', evt => {
-      playPauseTouchEndHandler(evt.target.previousElementSibling)
+    playPauseTouchEndHandler()
   })
 }
 
-const playPauseTouchEndHandler = evt => {
-  if (evt.checked === true) {
-      moveIndicator();
+const playPauseTouchEndHandler = () => {
+  if (_isPlaying) {
+    stopIndicator();
   }
   else {
-      stopIndicator();
+    moveIndicator();
   }
 }
 
@@ -119,6 +125,18 @@ const indicatorTouchEndHandler = evt => {
 const onNotifyCurrentXPositionChanged = (currentXPosition) => {
   const button = document.querySelector(".scrollBar button");
   button.style.marginLeft = currentXPosition + 'px';
+}
+
+const togglePlayPauseImage = isPlaying => {
+  const playPauseButton = document.getElementById("playPauseButton");
+  playPauseButton.classList.remove(playPauseButton.classList);
+
+  if (isPlaying) {
+    playPauseButton.classList.add('pause');
+  }
+  else {
+    playPauseButton.classList.add('play');
+  }
 }
 
 
