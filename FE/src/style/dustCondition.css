@@ -1,0 +1,63 @@
+.dustCondition{
+  width: 414px;
+  height: 666px;
+  margin: 0 auto;
+}
+.dustCondition > .dustInfo{
+  height: 340px;
+  text-align: center;
+  padding-top: 30px;
+}
+.dustCondition > .dustInfo > .title{
+  font-size: 25px;
+  font-weight: bold;
+}
+.dustCondition > .dustInfo >.gradeEmoji{
+  font-size: 120px;
+}
+.dustCondition > .dustInfo >.grade{
+  font-size: 25px;
+  font-weight: bold;
+}
+.dustCondition > .dustInfo >.dustValue{
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.dustCondition > .dustInfo >.timeValue{
+  font-size: 25px;
+}
+.dustCondition > .dustInfo >.measureStation {
+  font-size: 15px;
+  margin: 10px;
+}
+.dustCondition > .dustInfo >.measureStation>.stationName {
+  font-weight: bold;
+}
+.dustCondition > .dustGraph {
+  height: 296px;
+  overflow: scroll;
+}
+.dustCondition > .dustGraph > ul >li  {
+  height: 20px;
+  border: solid 0.5px #F2F2F2;
+  text-align: right;
+  overflow: scroll;
+}
+.dustCondition > .dustGraph > ul > li > .graph{
+  height: 100%;
+  padding-right: 5px;
+  box-sizing: border-box;}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+  
+/* @media (min-width: 320px) and (max-width: 480px) {
+    .dustCondition{
+        width: 100%;
+        height: 666px;
+        background-color: steelblue;
+    }
+} */

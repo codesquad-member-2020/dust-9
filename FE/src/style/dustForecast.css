@@ -1,0 +1,103 @@
+.dustForecast{
+  width: 414px;
+  height: 666px;
+  margin: 0 auto;
+}
+
+.dustForecast > .imageArea {
+  width: 414px;
+  height :350px;
+}
+
+.dustForecast > .imageArea > img{
+  width: 100%;
+  height: 100%;
+}
+
+.dustForecast > .information > .informOverall > p{
+  width: 95%;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+.dustForecast > .information >.informGrade{
+  margin-top: 15px;
+}
+
+.dustForecast > .information >.informGrade > p{
+  width: 95%;
+  font-size: 16px;
+  margin: 0 auto;
+}
+
+.dustForecast > .controll{
+  width: 100%;
+  height: 7px;
+}
+
+.dustForecast > .controll > .playpause{
+  width: 50px;
+  height: 70px;
+  float: left;
+}
+
+.dustForecast > .controll > .playpause > .play{
+  background: url("https://image.flaticon.com/icons/svg/254/254434.svg") center no-repeat;
+  margin-left: 15px;
+  width: 50px;
+  height: 70px;
+  float: left;
+}
+
+.dustForecast > .controll > .playpause > .pause{
+  background: url("https://image.flaticon.com/icons/svg/633/633940.svg") center no-repeat;
+  margin-left: 15px;
+  width: 50px;
+  height: 70px;
+  float: left;
+}
+
+.dustForecast > .controll > .scrollBar{
+  width: 334px;
+  height: 70px;
+  padding-left: 30px;
+  display: inline-block;
+  align-items: center;
+}
+
+.dustForecast > .controll > .scrollBar > .bar {
+  width: 300px;
+  height: 7px;
+  background: gray;
+  margin-left: 13px;
+  margin-top: 33px;
+}
+
+.dustForecast > .controll > .scrollBar > button {
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-top: -16px;
+  border-radius: 25px;
+  margin-left: 0px;
+  background-color: darkgray;
+}
+
+
+.dustForecast > .controll > .scrollBar > button:active {
+  background-color: gray;
+}
+
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+  
+/* @media (min-width: 320px) and (max-width: 480px) {
+    .dustForecast{
+        width: 100%;
+        height: 666px;
+        background-color: steelblue;
+    }
+} */
