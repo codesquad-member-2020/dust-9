@@ -54,7 +54,7 @@ const registerEventListener = () => {
 }
 
 const requestInformationData = () => {
-    fetchRequest(MOCK_URL.INFORMATION, "GET")
+    fetchRequest(SERVICE_URL.INFORMATION, "GET")
     .then(response => response.json())
     .then(data => {
         localStorage.setItem(CACHE_KEY.FORECAST_INFORMATION, JSON.stringify(data))
@@ -63,7 +63,7 @@ const requestInformationData = () => {
 }
 
 const requestImageData = () => {
-    fetchRequest(MOCK_URL.IMAGES, "GET")
+    fetchRequest(SERVICE_URL.IMAGES, "GET")
     .then(response => response.json())
     .then(data => {
         localStorage.setItem(CACHE_KEY.FORECAST_IMAGES, JSON.stringify(data))

@@ -2,6 +2,7 @@ import CLASS_NAME from "../constants/className.js"
 import {dustForecastData} from "../data/dustForecastData.js"
 
 const initXPosition = 0;
+const maxXPosition = 300;
 let _startXPosition = initXPosition;
 let _previousXPosition = initXPosition;
 let _animationTimer = null;
@@ -11,7 +12,7 @@ const render = () => {
     return `
     <div class="controll">
       <div class="playpause">
-        <img class="play" id="playPauseButton">
+        <img class="play" id="playPauseButton" border="0">
       </div>
       <div class="scrollBar">
         <div class="bar"></div>
@@ -40,20 +41,29 @@ const stopIndicator = () => {
 }
 
 const moveIndicator = () => {
-  _isPlaying = true;
-  togglePlayPauseImage(_isPlaying);
+  if (_previousXPosition === maxXPosition - 1 && !_isPlaying) {
+    _previousXPosition = 0;
+    dustForecastData.changeCurrentXPosition(0);
+  }
+
   let leftpos = _previousXPosition;
   const fps = 60;
 
   function moveIndicator(timestamp) {
       _animationTimer = setTimeout(function () {
-          if (leftpos < 299) {
+          if (leftpos < maxXPosition - 1) {
             leftpos += 1;
             dustForecastData.changeCurrentXPosition(leftpos);
             requestAnimationFrame(moveIndicator)
           }
+          else {
+            stopIndicator();
+          }
       }, 1000 / fps)
   }
+
+  _isPlaying = true;
+  togglePlayPauseImage(_isPlaying);
 
   requestAnimationFrame(moveIndicator)
 }
