@@ -2,6 +2,7 @@ import {fetchRequest} from "../util/fetchrequest.js"
 
 let fetchdata ;
 let currentIndex=0;
+let date = "오늘 ";
 
 const render = () => {
   const content = document.querySelector(".content");
@@ -25,7 +26,7 @@ const render = () => {
 };
 
 const init = () => {
-    const requestURL = `http://dust9.herokuapp.com/location?latitude=37.4756824&longitude=126.97742860000001`;
+    const requestURL = `http://dust99.herokuapp.com/location?latitude=37.4756824&longitude=126.97742860000001`;
     fetchRequest(requestURL, "GET")
       .then(response => response.json())
       .then(data => {
@@ -67,7 +68,9 @@ function renderDustInfo(data, index) {
   dustValue.innerHTML = data.dustValues[index].pm10Value + "&micro;g/㎥";
   stationName.innerHTML = data.stationName;
 
-  timeValue.innerHTML = "오늘 "+data.dustValues[index].datetime + ":00";
+  if(data.dustValues[index].datetime==="24") date = "어제 "
+  if(data.dustValues[index].datetime==="01") date = "오늘 "
+  timeValue.innerHTML = date+data.dustValues[index].datetime + ":00";
 
 
   //그래프 영역
