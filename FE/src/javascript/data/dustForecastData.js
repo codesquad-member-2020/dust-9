@@ -41,6 +41,9 @@ const dustForecastData = (function()
                     observer.onNotifyCurrentXPositionChanged(currentXPosition);
             });
         },
+        getCurrentXPosition: function() {
+            return currentXPosition;
+        },
         changeImageCount: function(count) {
             if (imageCount === count)
                 return;
