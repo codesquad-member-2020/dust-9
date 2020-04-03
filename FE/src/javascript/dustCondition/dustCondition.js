@@ -1,6 +1,7 @@
 import {fetchRequest} from "../util/fetchrequest.js"
 import dustGraphComponent  from "./dustGraphComponent.js"
 import dustGradeSetting  from "./dustGradeSetting.js"
+import {SERVICE_URL} from "../constants/serviceUrls.js"
 
 
 let fetchdata ;
@@ -29,7 +30,7 @@ const render = () => {
 };
 
 const init = () => {
-    const requestURL = `http://52.79.74.109:8080/location?latitude=37.4756824&longitude=126.97742860000001`;
+    const requestURL = `${SERVICE_URL.LOCATION}?latitude=37.4756824&longitude=126.97742860000001`;
     fetchRequest(requestURL, "GET")
       .then(response => response.json())
       .then(data => {
