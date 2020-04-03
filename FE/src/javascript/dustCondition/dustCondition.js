@@ -1,4 +1,7 @@
 import {fetchRequest} from "../util/fetchrequest.js"
+import dustGraphComponent  from "./dustGraphComponent.js"
+import dustGradeSetting  from "./dustGradeSetting.js"
+
 
 let fetchdata ;
 let currentIndex=0;
@@ -41,15 +44,13 @@ const registerEventListener = () => {
 
   dustGraph.addEventListener('scroll',e=>{
     let scrollTop = e.target.scrollTop;
-    currentIndex = Math.floor(scrollTop/(208/fetchdata.dustValues.length));
+    const scrollLength = 208;
+    currentIndex = Math.floor(scrollTop/(scrollLength/fetchdata.dustValues.length));
     if(currentIndex>=fetchdata.dustValues.length) return;
 
     renderDustInfo(fetchdata,currentIndex);
   })
 };
-
-
-
 
 function renderDustInfo(data, index) {
   const gradeEmoji = document.querySelector(".gradeEmoji");
@@ -59,7 +60,7 @@ function renderDustInfo(data, index) {
   const stationName = document.querySelector(".stationName");
   const dustInfo = document.querySelector(".dustInfo");
 
-  let gradeDisplay = setGradeDisplay(data.dustValues[index].pm10Grade);
+  let gradeDisplay = dustGradeSetting.setGradeDisplay(data.dustValues[index].pm10Grade);
 
   dustInfo.style.background = `linear-gradient(to top,white, ${gradeDisplay.background})`;
   grade.innerHTML = gradeDisplay.grade;
@@ -75,76 +76,13 @@ function renderDustInfo(data, index) {
 
   //그래프 영역
   const dustGraph = document.querySelector(".dustGraph");
-  const graphUl = makeGraphHTML(data);
+  const graphUl = dustGraphComponent.makeGraphHTML(data);
   dustGraph.innerHTML = graphUl;
-  makeGraph(data);
+  dustGraphComponent.makeGraph(data);
 
   const graph = document.querySelectorAll(".graph");
   graph[index].style.opacity = "0.5";
 
-}
-
-
-function makeGraphHTML(data){
-  const graphLi = data.dustValues.reduce(
-    (render, dustValue) => (render += ` <li class="graphLi"><div class="graph">${dustValue.pm10Value}</div></li>`),
-    ""
-  );
-  return `<ul>${graphLi}</ul>`;
-}
-
-function makeGraph(data){
-  const graph = document.querySelectorAll('.graph');
-  const graphLi = document.querySelectorAll('.graphLi');
-
-  for(let i = 0; i<graph.length;i++){
-    let graphWidth = graphLi[i].offsetWidth;
-    let dustValue = Number(data.dustValues[i].pm10Value);
-    let valueWidth = graphWidth/200*dustValue;
-
-    let gradeDisplay = setGradeDisplay(data.dustValues[i].pm10Grade);
-
-    if(Math.round(valueWidth)>=graphWidth) valueWidth = graphWidth-1;
-    graph[i].style.width = `${valueWidth}px`;
-    graph[i].style.background = gradeDisplay.graphColor;
-  }
-
-}
-
-function setGradeDisplay(gradeValue) {
-  const gradeDisplay = {
-    emoji: null,
-    grade: null,
-    background: null
-  };
-
-  switch (gradeDisplay, gradeValue) {
-    case '1':
-      gradeDisplay.emoji='😀';
-      gradeDisplay.grade='좋음';
-      gradeDisplay.background='#6096D8';
-      gradeDisplay.graphColor ='#0080FF';
-      break;
-    case '2':
-      gradeDisplay.emoji='🙂';
-      gradeDisplay.grade='보통';
-      gradeDisplay.background='#088A68';
-      gradeDisplay.graphColor ='#04B404';
-      break;
-    case '3':
-      gradeDisplay.emoji='😷';
-      gradeDisplay.grade='나쁨';
-      gradeDisplay.background='#FAAC58';
-      gradeDisplay.graphColor ='#FE9A2E';
-      break;
-    case '4':
-      gradeDisplay.emoji='😱';
-      gradeDisplay.grade='매우 나쁨';
-      gradeDisplay.background='#FA5858';
-      gradeDisplay.graphColor ='#DF0101';
-      break;
-  }
-  return gradeDisplay;
 }
 
 export default { render, init, registerEventListener };
