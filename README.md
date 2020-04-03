@@ -7,17 +7,22 @@
 ## 요구사항 분석 스프레드시트 
 [https://docs.google.com/spreadsheets/d/1tAolHvdSZUqzN1v54wQQhXsosJQsSVjXHvc1UjUMKPA/edit#gid=0](https://docs.google.com/spreadsheets/d/1tAolHvdSZUqzN1v54wQQhXsosJQsSVjXHvc1UjUMKPA/edit#gid=0)
 
-## 요청 URL형식 
-- 사용자 근처 측정소 데이터 : GET http://dust9.herokuapp.com/location?latitude=123.123&longitude=-123.123
-- 예보 이미지 : GET http://dust9.herokuapp.com/images
-- 시도별 예보 문구 및 등급 : GET http://dust9.herokuapp.com/information
+## Heroku 배포 URL (heroku9 -> heroku99 변경) 
+- 사용자 근처 측정소 데이터 : GET http://dust99.herokuapp.com/location?latitude=37.4624272&longitude=126.97828419999999
+- 예보 이미지 : GET http://dust99.herokuapp.com/images
+- 시도별 예보 문구 및 등급 : GET http://dust99.herokuapp.com/information
+
+## 실제 배포 URL 
+- 사용자 근처 측정소 데이터 : GET http://52.79.74.109:8080/location?latitude=37.4624272&longitude=126.97828419999999
+- 예보 이미지 : GET http://52.79.74.109:8080/images
+- 시도별 예보 문구 및 등급 : GET http://52.79.74.109:8080/information
 
 
 ## Json 형식 
 - 사용자 근처 측정소와 지난 24시간 미세먼지 농도 응답 결과 
 ```
 {
-    "stationName": "노원구",
+    "stationName": "동작구",
     "dustValues": [
         {
             "pm10Value": "50",
@@ -55,7 +60,12 @@
 
 - 예보 이미지
 ```
-{"images": ["http://dev-angelo.dlinkddns.com/0401_00.png", "http://dev-angelo.dlinkddns.com/0401_01.png", "http://dev-angelo.dlinkddns.com/0401_02.png", "http://dev-angelo.dlinkddns.com/0401_03.png", "http://dev-angelo.dlinkddns.com/0401_04.png", "http://dev-angelo.dlinkddns.com/0401_05.png", "http://dev-angelo.dlinkddns.com/0401_06.png", "http://dev-angelo.dlinkddns.com/0401_07.png", "http://dev-angelo.dlinkddns.com/0401_08.png", "http://dev-angelo.dlinkddns.com/0401_09.png", "http://dev-angelo.dlinkddns.com/0401_10.png", "http://dev-angelo.dlinkddns.com/0401_11.png", "http://dev-angelo.dlinkddns.com/0401_12.png", "http://dev-angelo.dlinkddns.com/0401_13.png", "http://dev-angelo.dlinkddns.com/0401_14.png", "http://dev-angelo.dlinkddns.com/0401_15.png", "http://dev-angelo.dlinkddns.com/0401_16.png", "http://dev-angelo.dlinkddns.com/0401_17.png", "http://dev-angelo.dlinkddns.com/0401_18.png", "http://dev-angelo.dlinkddns.com/0401_19.png", "http://dev-angelo.dlinkddns.com/0401_20.png", "http://dev-angelo.dlinkddns.com/0401_21.png", "http://dev-angelo.dlinkddns.com/0401_22.png", "http://dev-angelo.dlinkddns.com/0401_23.png"]}
+{
+images: [
+"http://www.airkorea.or.kr/file/viewImage/?atch_id=139069",
+"http://www.airkorea.or.kr/file/viewImage/?atch_id=139070",
+"http://www.airkorea.or.kr/file/viewImage/?atch_id=139071"]
+}
 ```
 
 - 예보 문구, 지역별 등급
